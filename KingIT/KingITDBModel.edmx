@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employers">
+          <Key>
+            <PropertyRef Name="idEmployer" />
+          </Key>
+          <Property Name="idEmployer" Type="int" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="idPost" Type="int" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="halls">
+          <Key>
+            <PropertyRef Name="hallNum" />
+            <PropertyRef Name="idMail" />
+          </Key>
+          <Property Name="hallNum" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="idMail" Type="int" Nullable="false" />
+          <Property Name="floor" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="area" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="valAddedFactor" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="malls">
+          <Key>
+            <PropertyRef Name="idMall" />
+          </Key>
+          <Property Name="idMall" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="hallsCount" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valAddedFactor" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+          <Property Name="floorsCount" Type="int" Nullable="false" />
+          <Property Name="icon" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="postes">
+          <Key>
+            <PropertyRef Name="idPost" />
+          </Key>
+          <Property Name="idPost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rent">
+          <Key>
+            <PropertyRef Name="idRent" />
+          </Key>
+          <Property Name="idRent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTenant" Type="int" Nullable="false" />
+          <Property Name="idMall" Type="int" Nullable="false" />
+          <Property Name="idEmployer" Type="int" Nullable="false" />
+          <Property Name="hallNum" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
+          <Property Name="dateStart" Type="date" Nullable="false" />
+          <Property Name="dateEnd" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statuses">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tenants">
+          <Key>
+            <PropertyRef Name="idTenant" />
+          </Key>
+          <Property Name="idTenant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactPhone" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_id_role">
+          <End Role="postes" Type="Self.postes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employers" Type="Self.employers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postes">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="employers">
+              <PropertyRef Name="idPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pavilions_shopping_center">
+          <End Role="malls" Type="Self.malls" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="halls" Type="Self.halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="malls">
+              <PropertyRef Name="idMall" />
+            </Principal>
+            <Dependent Role="halls">
+              <PropertyRef Name="idMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pavilions_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1" />
+          <End Role="halls" Type="Self.halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="halls">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_employers">
+          <End Role="employers" Type="Self.employers" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employers">
+              <PropertyRef Name="idEmployer" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idEmployer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_halls">
+          <End Role="halls" Type="Self.halls" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="halls">
+              <PropertyRef Name="hallNum" />
+              <PropertyRef Name="idMail" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="hallNum" />
+              <PropertyRef Name="idMall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_tenants">
+          <End Role="tenants" Type="Self.tenants" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tenants">
+              <PropertyRef Name="idTenant" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idTenant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shopping_center_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="malls" Type="Self.malls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="malls">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="f_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_login">
+          <Parameter Name="user_login" Type="nvarchar" Mode="In" />
+          <Parameter Name="user_password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="f_login_f" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_login_f" ReturnType="int">
+          <Parameter Name="user_login" Type="nvarchar" Mode="In" />
+          <Parameter Name="user_password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="RentOrBookPavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pavilion" Type="char" Mode="In" />
+          <Parameter Name="id_shopping_center" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="setDateRent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище KingITDBModelContainer">
+          <EntitySet Name="employers" EntityType="Self.employers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="halls" EntityType="Self.halls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="malls" EntityType="Self.malls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postes" EntityType="Self.postes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rent" EntityType="Self.rent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statuses" EntityType="Self.statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tenants" EntityType="Self.tenants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_id_role" Association="Self.fk_id_role">
+            <End Role="postes" EntitySet="postes" />
+            <End Role="employers" EntitySet="employers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pavilions_shopping_center" Association="Self.FK_pavilions_shopping_center">
+            <End Role="malls" EntitySet="malls" />
+            <End Role="halls" EntitySet="halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pavilions_statuses" Association="Self.FK_pavilions_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="halls" EntitySet="halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_employers" Association="Self.FK_rent_employers">
+            <End Role="employers" EntitySet="employers" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_halls" Association="Self.FK_rent_halls">
+            <End Role="halls" EntitySet="halls" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_statuses" Association="Self.FK_rent_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_tenants" Association="Self.FK_rent_tenants">
+            <End Role="tenants" EntitySet="tenants" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shopping_center_statuses" Association="Self.FK_shopping_center_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="malls" EntitySet="malls" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employers">
+          <Key>
+            <PropertyRef Name="idEmployer" />
+          </Key>
+          <Property Name="idEmployer" Type="Int32" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idPost" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="postes" Relationship="Self.fk_id_role" FromRole="employers" ToRole="postes" />
+          <NavigationProperty Name="rent" Relationship="Self.FK_rent_employers" FromRole="employers" ToRole="rent" />
+        </EntityType>
+        <EntityType Name="halls">
+          <Key>
+            <PropertyRef Name="hallNum" />
+            <PropertyRef Name="idMail" />
+          </Key>
+          <Property Name="hallNum" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idMail" Type="Int32" Nullable="false" />
+          <Property Name="floor" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="area" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="valAddedFactor" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <NavigationProperty Name="malls" Relationship="Self.FK_pavilions_shopping_center" FromRole="halls" ToRole="malls" />
+          <NavigationProperty Name="statuses" Relationship="Self.FK_pavilions_statuses" FromRole="halls" ToRole="statuses" />
+          <NavigationProperty Name="rent" Relationship="Self.FK_rent_halls" FromRole="halls" ToRole="rent" />
+        </EntityType>
+        <EntityType Name="malls">
+          <Key>
+            <PropertyRef Name="idMall" />
+          </Key>
+          <Property Name="idMall" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="hallsCount" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valAddedFactor" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+          <Property Name="floorsCount" Type="Int32" Nullable="false" />
+          <Property Name="icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="halls" Relationship="Self.FK_pavilions_shopping_center" FromRole="malls" ToRole="halls" />
+          <NavigationProperty Name="statuses" Relationship="Self.FK_shopping_center_statuses" FromRole="malls" ToRole="statuses" />
+        </EntityType>
+        <EntityType Name="postes">
+          <Key>
+            <PropertyRef Name="idPost" />
+          </Key>
+          <Property Name="idPost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="employers" Relationship="Self.fk_id_role" FromRole="postes" ToRole="employers" />
+        </EntityType>
+        <EntityType Name="rent">
+          <Key>
+            <PropertyRef Name="idRent" />
+          </Key>
+          <Property Name="idRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTenant" Type="Int32" Nullable="false" />
+          <Property Name="idMall" Type="Int32" Nullable="false" />
+          <Property Name="idEmployer" Type="Int32" Nullable="false" />
+          <Property Name="hallNum" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="employers" Relationship="Self.FK_rent_employers" FromRole="rent" ToRole="employers" />
+          <NavigationProperty Name="halls" Relationship="Self.FK_rent_halls" FromRole="rent" ToRole="halls" />
+          <NavigationProperty Name="statuses" Relationship="Self.FK_rent_statuses" FromRole="rent" ToRole="statuses" />
+          <NavigationProperty Name="tenants" Relationship="Self.FK_rent_tenants" FromRole="rent" ToRole="tenants" />
+        </EntityType>
+        <EntityType Name="statuses">
+          <Key>
+            <PropertyRef Name="idStatus" />
+          </Key>
+          <Property Name="idStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="halls" Relationship="Self.FK_pavilions_statuses" FromRole="statuses" ToRole="halls" />
+          <NavigationProperty Name="malls" Relationship="Self.FK_shopping_center_statuses" FromRole="statuses" ToRole="malls" />
+          <NavigationProperty Name="rent" Relationship="Self.FK_rent_statuses" FromRole="statuses" ToRole="rent" />
+        </EntityType>
+        <EntityType Name="tenants">
+          <Key>
+            <PropertyRef Name="idTenant" />
+          </Key>
+          <Property Name="idTenant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contactPhone" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="rent" Relationship="Self.FK_rent_tenants" FromRole="tenants" ToRole="rent" />
+        </EntityType>
+        <Association Name="fk_id_role">
+          <End Role="postes" Type="Self.postes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employers" Type="Self.employers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="postes">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="employers">
+              <PropertyRef Name="idPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_employers">
+          <End Role="employers" Type="Self.employers" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employers">
+              <PropertyRef Name="idEmployer" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idEmployer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pavilions_shopping_center">
+          <End Role="malls" Type="Self.malls" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="halls" Type="Self.halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="malls">
+              <PropertyRef Name="idMall" />
+            </Principal>
+            <Dependent Role="halls">
+              <PropertyRef Name="idMail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pavilions_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1" />
+          <End Role="halls" Type="Self.halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="halls">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_halls">
+          <End Role="halls" Type="Self.halls" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="halls">
+              <PropertyRef Name="hallNum" />
+              <PropertyRef Name="idMail" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="hallNum" />
+              <PropertyRef Name="idMall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_shopping_center_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="malls" Type="Self.malls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="malls">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_statuses">
+          <End Role="statuses" Type="Self.statuses" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuses">
+              <PropertyRef Name="idStatus" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rent_tenants">
+          <End Role="tenants" Type="Self.tenants" Multiplicity="1" />
+          <End Role="rent" Type="Self.rent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tenants">
+              <PropertyRef Name="idTenant" />
+            </Principal>
+            <Dependent Role="rent">
+              <PropertyRef Name="idTenant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KingITDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employers" EntityType="Self.employers" />
+          <EntitySet Name="halls" EntityType="Self.halls" />
+          <EntitySet Name="malls" EntityType="Self.malls" />
+          <EntitySet Name="postes" EntityType="Self.postes" />
+          <EntitySet Name="rent" EntityType="Self.rent" />
+          <EntitySet Name="statuses" EntityType="Self.statuses" />
+          <EntitySet Name="tenants" EntityType="Self.tenants" />
+          <AssociationSet Name="fk_id_role" Association="Self.fk_id_role">
+            <End Role="postes" EntitySet="postes" />
+            <End Role="employers" EntitySet="employers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_employers" Association="Self.FK_rent_employers">
+            <End Role="employers" EntitySet="employers" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pavilions_shopping_center" Association="Self.FK_pavilions_shopping_center">
+            <End Role="malls" EntitySet="malls" />
+            <End Role="halls" EntitySet="halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pavilions_statuses" Association="Self.FK_pavilions_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="halls" EntitySet="halls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_halls" Association="Self.FK_rent_halls">
+            <End Role="halls" EntitySet="halls" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shopping_center_statuses" Association="Self.FK_shopping_center_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="malls" EntitySet="malls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_statuses" Association="Self.FK_rent_statuses">
+            <End Role="statuses" EntitySet="statuses" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rent_tenants" Association="Self.FK_rent_tenants">
+            <End Role="tenants" EntitySet="tenants" />
+            <End Role="rent" EntitySet="rent" />
+          </AssociationSet>
+          <FunctionImport Name="f_login">
+            <Parameter Name="user_login" Mode="In" Type="String" />
+            <Parameter Name="user_password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RentOrBookPavilion">
+            <Parameter Name="id_pavilion" Mode="In" Type="String" />
+            <Parameter Name="id_shopping_center" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="setDateRent" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KingITDBModelContainer" CdmEntityContainer="KingITDBEntities">
+          <EntitySetMapping Name="employers">
+            <EntityTypeMapping TypeName="KingITDBModel.employers">
+              <MappingFragment StoreEntitySet="employers">
+                <ScalarProperty Name="idEmployer" ColumnName="idEmployer" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idPost" ColumnName="idPost" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="halls">
+            <EntityTypeMapping TypeName="KingITDBModel.halls">
+              <MappingFragment StoreEntitySet="halls">
+                <ScalarProperty Name="hallNum" ColumnName="hallNum" />
+                <ScalarProperty Name="idMail" ColumnName="idMail" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="valAddedFactor" ColumnName="valAddedFactor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="malls">
+            <EntityTypeMapping TypeName="KingITDBModel.malls">
+              <MappingFragment StoreEntitySet="malls">
+                <ScalarProperty Name="idMall" ColumnName="idMall" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="hallsCount" ColumnName="hallsCount" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="valAddedFactor" ColumnName="valAddedFactor" />
+                <ScalarProperty Name="floorsCount" ColumnName="floorsCount" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postes">
+            <EntityTypeMapping TypeName="KingITDBModel.postes">
+              <MappingFragment StoreEntitySet="postes">
+                <ScalarProperty Name="idPost" ColumnName="idPost" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rent">
+            <EntityTypeMapping TypeName="KingITDBModel.rent">
+              <MappingFragment StoreEntitySet="rent">
+                <ScalarProperty Name="idRent" ColumnName="idRent" />
+                <ScalarProperty Name="idTenant" ColumnName="idTenant" />
+                <ScalarProperty Name="idMall" ColumnName="idMall" />
+                <ScalarProperty Name="idEmployer" ColumnName="idEmployer" />
+                <ScalarProperty Name="hallNum" ColumnName="hallNum" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statuses">
+            <EntityTypeMapping TypeName="KingITDBModel.statuses">
+              <MappingFragment StoreEntitySet="statuses">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tenants">
+            <EntityTypeMapping TypeName="KingITDBModel.tenants">
+              <MappingFragment StoreEntitySet="tenants">
+                <ScalarProperty Name="idTenant" ColumnName="idTenant" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_login" FunctionName="Хранилище KingITDBModel.f_login" />
+          <FunctionImportMapping FunctionImportName="RentOrBookPavilion" FunctionName="Хранилище KingITDBModel.RentOrBookPavilion" />
+          <FunctionImportMapping FunctionImportName="setDateRent" FunctionName="Хранилище KingITDBModel.setDateRent" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
