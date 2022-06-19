@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -67,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="pages\Capcha.xaml.cs">
+      <DependentUpon>Capcha.xaml</DependentUpon>
+    </Compile>
     <Compile Include="employers.cs">
       <DependentUpon>KingITDBModel.tt</DependentUpon>
     </Compile>
@@ -91,6 +95,9 @@
     <Compile Include="malls.cs">
       <DependentUpon>KingITDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="pages\login.xaml.cs">
+      <DependentUpon>login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="postes.cs">
       <DependentUpon>KingITDBModel.tt</DependentUpon>
     </Compile>
@@ -104,6 +111,10 @@
       <DependentUpon>KingITDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="get_set_img.cs" />
+    <Page Include="pages\Capcha.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +127,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

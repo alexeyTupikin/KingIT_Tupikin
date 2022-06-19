@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Icon="/img/iconKingIT.png">
     <Grid>
-        <Image x:Name="img__" HorizontalAlignment="Left" Height="141" Margin="222,176,0,0" VerticalAlignment="Top" Width="160"/>
-
+        <Frame x:Name="frame" Source="/pages/login.xaml"></Frame>
     </Grid>
 </Window>

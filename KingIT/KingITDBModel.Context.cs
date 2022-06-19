@@ -69,5 +69,18 @@ namespace KingIT
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("setDateRent");
         }
+    
+        public virtual ObjectResult<Nullable<int>> login_proc(string user_login, string user_pass)
+        {
+            var user_loginParameter = user_login != null ?
+                new ObjectParameter("user_login", user_login) :
+                new ObjectParameter("user_login", typeof(string));
+    
+            var user_passParameter = user_pass != null ?
+                new ObjectParameter("user_pass", user_pass) :
+                new ObjectParameter("user_pass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("login_proc", user_loginParameter, user_passParameter);
+        }
     }
 }

@@ -20,6 +20,8 @@
         <AssociationConnector Association="KingITDBModel.FK_shopping_center_statuses" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_statuses" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_tenants" ManuallyRouted="false" />
+        <AssociationConnector Association="KingITDBModel.fk_id_role1" />
+        <AssociationConnector Association="KingITDBModel.FK_rent_employers1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="employers">
           <Key>
             <PropertyRef Name="idEmployer" />
@@ -187,20 +187,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="f_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_login">
+        <Function Name="login_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="user_login" Type="nvarchar" Mode="In" />
-          <Parameter Name="user_password" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="f_login_f" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="_login_f" ReturnType="int">
-          <Parameter Name="user_login" Type="nvarchar" Mode="In" />
-          <Parameter Name="user_password" Type="nvarchar" Mode="In" />
+          <Parameter Name="user_pass" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="RentOrBookPavilion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_pavilion" Type="char" Mode="In" />
           <Parameter Name="id_shopping_center" Type="int" Mode="In" />
           <Parameter Name="status" Type="int" Mode="In" />
         </Function>
-        <Function Name="setDateRent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище KingITDBModelContainer">
           <EntitySet Name="employers" EntityType="Self.employers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="halls" EntityType="Self.halls" Schema="dbo" store:Type="Tables" />
@@ -242,8 +237,7 @@
             <End Role="malls" EntitySet="malls" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -495,6 +489,10 @@
             <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="setDateRent" />
+          <FunctionImport Name="login_proc" ReturnType="Collection(Int32)">
+            <Parameter Name="user_login" Mode="In" Type="String" />
+            <Parameter Name="user_pass" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -586,9 +584,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="f_login" FunctionName="Хранилище KingITDBModel.f_login" />
           <FunctionImportMapping FunctionImportName="RentOrBookPavilion" FunctionName="Хранилище KingITDBModel.RentOrBookPavilion" />
-          <FunctionImportMapping FunctionImportName="setDateRent" FunctionName="Хранилище KingITDBModel.setDateRent" />
+          <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="KingIT.Capcha"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KingIT.pages"
+        mc:Ignorable="d"
+        Title="Capcha" Height="382" Width="349">
+    <Grid>
+        <Image x:Name="imgCapcha" Width="200"
+               Height="200"
+               Margin="70,10,71,0"
+               VerticalAlignment="Top"/>
+        <TextBox x:Name="CaptchaBox"
+                 Width="250"
+                 Height="30"
+                 Margin="0,170,0,0"/>
+        <Button Content="Обновить"
+                Width="100" 
+                HorizontalAlignment="Left" 
+                Margin="25,310,0,10"
+                Click="Refresh"/>
+        <Button Content="Подтвердить"
+                Width="100" 
+                HorizontalAlignment="Right" 
+                Margin="0,310,25,10"
+                Click="Success"/>
+    </Grid>
+</Window>

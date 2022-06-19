@@ -1,0 +1,23 @@
+﻿<Page x:Class="KingIT.pages.login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KingIT.pages"
+      mc:Ignorable="d" 
+      Height="450" Width="800"
+      Title="login">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="login_text" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="60,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <PasswordBox x:Name="pass_text" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="60,217,0,0" VerticalAlignment="Top" Width="160"/>
+        <Label Grid.Column="1" Content="Введите логин:" Margin="60,130,70,290" RenderTransformOrigin="0.5,0.565"/>
+        <Label Grid.Column="1" Content="Введите пароль:" HorizontalAlignment="Left" Margin="60,191,0,0" VerticalAlignment="Top" Height="26" Width="160"/>
+        <Button x:Name="login_ac" Click="login_ac_Click" Content="Войти" Grid.Column="1" HorizontalAlignment="Left" Margin="60,265,0,0" VerticalAlignment="Top" Width="160" Height="23"/>
+    </Grid>
+</Page>

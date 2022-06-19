@@ -27,10 +27,12 @@ namespace KingIT
         public MainWindow()
         {
             InitializeComponent();
-            setPhotoEmp();
+            
+            //setPhotoEmp();
             //setPhotoMall();
         }
 
+        #region setPhoto
         public void setPhotoEmp()
         {
             string[] fio;
@@ -39,7 +41,7 @@ namespace KingIT
             string second_name = "";
             int buf_id;
             char[] end_name = { '.', 'j', 'p', 'g', 'n' }; 
-            string pathToDirectory = @"C:\Users\eoaal\source\repos\KingIT\KingIT\img_employers";
+            string pathToDirectory = @"C:\Users\alexe\Source\Repos\KingIT_Tupikin\KingIT\img_employers";
             Directory
                 .GetFiles(pathToDirectory, "*", SearchOption.TopDirectoryOnly).ToList()
                 .ForEach(f =>
@@ -66,7 +68,7 @@ namespace KingIT
             string title_mall;
             int buf_id;
             char[] end_name = { '.', 'j', 'p', 'g', 'n' };
-            string pathToDirectory = @"C:\Users\eoaal\source\repos\KingIT\KingIT\img_mall";
+            string pathToDirectory = @"C:\Users\alexe\Source\Repos\KingIT_Tupikin\KingIT\img_mall";
             Directory
                 .GetFiles(pathToDirectory, "*", SearchOption.TopDirectoryOnly).ToList()
                 .ForEach(f =>
@@ -79,11 +81,13 @@ namespace KingIT
                                   select e.idMall).FirstOrDefault();
 
                         var current_ = (from e in cnt1.malls where e.idMall == buf_id select e).FirstOrDefault();
-                        current_.icon = get_set_img.GetImageBytes(System.IO.Path.GetFullPath(f));
-                        cnt1.SaveChanges();
+                        if (current_ != null) {
+                            current_.icon = get_set_img.GetImageBytes(System.IO.Path.GetFullPath(f));
+                            cnt1.SaveChanges();
+                        }
                     }
                 });
         }
-
+        #endregion
     }
 }
