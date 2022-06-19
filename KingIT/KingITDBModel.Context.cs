@@ -34,6 +34,8 @@ namespace KingIT
         public virtual DbSet<rent> rent { get; set; }
         public virtual DbSet<statuses> statuses { get; set; }
         public virtual DbSet<tenants> tenants { get; set; }
+        public virtual DbSet<forMalls> forMalls { get; set; }
+        public virtual DbSet<CITY> CITY { get; set; }
     
         public virtual int f_login(string user_login, string user_password)
         {

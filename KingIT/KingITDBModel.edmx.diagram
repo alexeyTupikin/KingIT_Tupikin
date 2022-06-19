@@ -22,6 +22,8 @@
         <AssociationConnector Association="KingITDBModel.FK_rent_tenants" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.fk_id_role1" />
         <AssociationConnector Association="KingITDBModel.FK_rent_employers1" />
+        <EntityTypeShape EntityType="KingITDBModel.forMalls" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KingITDBModel.CITY" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,9 +21,11 @@ namespace KingIT.pages
     public partial class login : Page
     {
         public int tryAcc = 0;
-        public login()
+        MainWindow mainWindow;
+        public login(MainWindow _mainWindow)
         {
             InitializeComponent();
+            mainWindow = _mainWindow;
         }
 
         private void login_ac_Click(object sender, RoutedEventArgs e)
@@ -34,6 +36,32 @@ namespace KingIT.pages
                 if (check_acc != null)
                 {
                     //реализация перехода на нужную форму исходя их id и роли пользователя
+                    using (KingITDBEntities db = new KingITDBEntities())
+                    {
+                        var buf_position = (from emp in db.employers where emp.idEmployer == check_acc select emp.idPost).FirstOrDefault();
+                        switch (buf_position)
+                        {
+                            case 1: //Admin
+                                {
+                                    break;
+                                }
+                            case 2: //Manager A
+                                {
+                                    break;
+                                }
+                            case 3: //Manager C
+                                {
+                                    //
+                                    mainWindow.frame.Navigate(new pages.iManagerC(mainWindow));
+                                    break;
+                                }
+                            case 4: //Delete
+                                {
+                                    MessageBox.Show("Пользователь удален.");
+                                    break;
+                                }
+                        }
+                    }
                     //MessageBox.Show(Convert.ToString(check_acc)); Вывод id сотрудника
                     tryAcc = 0;
                 }

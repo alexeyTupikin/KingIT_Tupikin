@@ -83,6 +83,34 @@
           <Property Name="contactPhone" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KingITDB.dbo.CITY" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KingITDB.dbo.forMalls" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="forMalls">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="StatusMall" />
+            <PropertyRef Name="hallsCount" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="cost" />
+            <PropertyRef Name="floorsCount" />
+            <PropertyRef Name="valAddedFactor" />
+          </Key>
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StatusMall" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hallsCount" Type="int" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="floorsCount" Type="int" Nullable="false" />
+          <Property Name="valAddedFactor" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+        </EntityType>
         <Association Name="fk_id_role">
           <End Role="postes" Type="Self.postes" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -204,6 +232,22 @@
           <EntitySet Name="rent" EntityType="Self.rent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="statuses" EntityType="Self.statuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tenants" EntityType="Self.tenants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CITY].[address] AS [address]
+    FROM [dbo].[CITY] AS [CITY]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="forMalls" EntityType="Self.forMalls" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [forMalls].[title] AS [title], 
+    [forMalls].[StatusMall] AS [StatusMall], 
+    [forMalls].[hallsCount] AS [hallsCount], 
+    [forMalls].[address] AS [address], 
+    [forMalls].[cost] AS [cost], 
+    [forMalls].[floorsCount] AS [floorsCount], 
+    [forMalls].[valAddedFactor] AS [valAddedFactor]
+    FROM [dbo].[forMalls] AS [forMalls]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_id_role" Association="Self.fk_id_role">
             <End Role="postes" EntitySet="postes" />
             <End Role="employers" EntitySet="employers" />
@@ -493,7 +537,33 @@
             <Parameter Name="user_login" Mode="In" Type="String" />
             <Parameter Name="user_pass" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="forMalls" EntityType="KingITDBModel.forMalls" />
+          <EntitySet Name="CITY" EntityType="KingITDBModel.CITY" />
         </EntityContainer>
+        <EntityType Name="forMalls">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="StatusMall" />
+            <PropertyRef Name="hallsCount" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="cost" />
+            <PropertyRef Name="floorsCount" />
+            <PropertyRef Name="valAddedFactor" />
+          </Key>
+          <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StatusMall" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hallsCount" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="floorsCount" Type="Int32" Nullable="false" />
+          <Property Name="valAddedFactor" Type="Decimal" Nullable="false" Precision="4" Scale="1" />
+        </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -586,6 +656,26 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RentOrBookPavilion" FunctionName="Хранилище KingITDBModel.RentOrBookPavilion" />
           <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
+          <EntitySetMapping Name="forMalls">
+            <EntityTypeMapping TypeName="KingITDBModel.forMalls">
+              <MappingFragment StoreEntitySet="forMalls">
+                <ScalarProperty Name="valAddedFactor" ColumnName="valAddedFactor" />
+                <ScalarProperty Name="floorsCount" ColumnName="floorsCount" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="hallsCount" ColumnName="hallsCount" />
+                <ScalarProperty Name="StatusMall" ColumnName="StatusMall" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITY">
+            <EntityTypeMapping TypeName="KingITDBModel.CITY">
+              <MappingFragment StoreEntitySet="CITY">
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

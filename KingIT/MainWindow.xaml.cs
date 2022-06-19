@@ -23,11 +23,10 @@ namespace KingIT
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<string> FIO = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
-            
+            frame.Navigate(new pages.iManagerC(this));
             //setPhotoEmp();
             //setPhotoMall();
         }

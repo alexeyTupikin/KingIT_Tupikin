@@ -1,0 +1,38 @@
+﻿<Page x:Class="KingIT.pages.iManagerC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KingIT.pages"
+      mc:Ignorable="d" 
+      Height="450" Width="800"
+      Title="iManagerC">
+
+    <Grid>
+        <ToolBar  Margin="10,10,10,415" Height="30">
+            <Button x:Name="update_but" Click="updateButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="25">
+                <Image Source="/img/pngwing.com.png"></Image>
+            </Button>
+            <Label  Margin="5,0,0,0">Отсортировать по статусу:</Label>
+            <ComboBox x:Name="f_Status" Margin="5,0,0,0" Width="100" SelectionChanged="f_Status_SelectionChanged">
+            </ComboBox>
+            <Label  Margin="20,0,0,0">Отсортировать по городу:</Label>
+            <ComboBox x:Name="f_city" Margin="5,0,0,0" Width="100">
+            </ComboBox>
+            <Button x:Name="goIMalls_but" Margin="60,0,0,0" Click="goIMalls_but_Click" Content="Интерфейс ТЦ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25">
+            </Button>
+        </ToolBar>
+        <DataGrid x:Name="dataGridMalls" Margin="10,70,10,105" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="120" Binding="{Binding title}" Header="Название ТЦ"/>
+                <DataGridTextColumn MinWidth="50" Binding="{Binding StatusMall}" Header="Статус"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding hallsCount}" Header="Кол-во павильенов"/>
+                <DataGridTextColumn MinWidth="100" Binding="{Binding address}" Header="Город"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding cost}" Header="Стоимость постройки"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding floorsCount}" Header="Кол-во этажей"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding valAddedFactor}" Header="Кф. доп. стоимости"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button  HorizontalAlignment="Left" Margin="685,390,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+    </Grid>
+</Page>

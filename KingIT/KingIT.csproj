@@ -68,6 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CITY.cs">
+      <DependentUpon>KingITDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="forMalls.cs">
+      <DependentUpon>KingITDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="pages\Capcha.xaml.cs">
       <DependentUpon>Capcha.xaml</DependentUpon>
     </Compile>
@@ -94,6 +100,15 @@
     </Compile>
     <Compile Include="malls.cs">
       <DependentUpon>KingITDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pages\iAdmin.xaml.cs">
+      <DependentUpon>iAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\iManagerA.xaml.cs">
+      <DependentUpon>iManagerA.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\iManagerC.xaml.cs">
+      <DependentUpon>iManagerC.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
@@ -127,6 +142,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pages\iAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\iManagerA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\iManagerC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="pages\login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,6 +261,7 @@
     <Resource Include="img_mall\Щука.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\pngwing.com.png" />
     <Content Include="KingITDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>KingITDBModel.Context.cs</LastGenOutput>
