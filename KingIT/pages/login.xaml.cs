@@ -52,6 +52,7 @@ namespace KingIT.pages
                             case 3: //Manager C
                                 {
                                     //
+                                    MessageBox.Show("Ваш тип пользователя: Менеджер С");
                                     mainWindow.frame.Navigate(new pages.iManagerC(mainWindow));
                                     break;
                                 }
@@ -72,6 +73,9 @@ namespace KingIT.pages
                     {
                         Capcha capchaWindow = new Capcha();
                         capchaWindow.ShowDialog();
+                        tryAcc = 0;
+                        login_text.Text = "";
+                        pass_text.Password = "";
                     }
                     else MessageBox.Show("Введенный вами логин или пароль неверен");
                 }

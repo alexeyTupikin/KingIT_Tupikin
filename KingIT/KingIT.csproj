@@ -69,37 +69,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CITY.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="employers.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
     <Compile Include="forMalls.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="halls.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KingITDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KingITDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KingITDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KingITDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KingITDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="malls.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pages\addNewMall.xaml.cs">
+      <DependentUpon>addNewMall.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\Capcha.xaml.cs">
       <DependentUpon>Capcha.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="employers.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="halls.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KingITDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KingITDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KingITDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="malls.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="pages\iAdmin.xaml.cs">
       <DependentUpon>iAdmin.xaml</DependentUpon>
@@ -113,19 +116,23 @@
     <Compile Include="pages\login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="get_set_img.cs" />
     <Compile Include="postes.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
     <Compile Include="rent.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
     <Compile Include="statuses.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tenants.cs">
-      <DependentUpon>KingITDBModel.tt</DependentUpon>
+      <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="get_set_img.cs" />
+    <Page Include="pages\addNewMall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\Capcha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,12 +184,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="KingITDBModel.edmx">
+    <EntityDeploy Include="KingITDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KingITDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>KingITDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="KingITDBModel.edmx.diagram">
-      <DependentUpon>KingITDBModel.edmx</DependentUpon>
+    <None Include="KingITDB.edmx.diagram">
+      <DependentUpon>KingITDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -262,19 +269,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\pngwing.com.png" />
-    <Content Include="KingITDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>KingITDBModel.Context.cs</LastGenOutput>
-      <DependentUpon>KingITDBModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="KingITDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KingITDBModel.edmx</DependentUpon>
-      <LastGenOutput>KingITDBModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KingITDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KingITDB.edmx</DependentUpon>
+      <LastGenOutput>KingITDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="KingITDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KingITDB.edmx</DependentUpon>
+      <LastGenOutput>KingITDB.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

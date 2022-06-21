@@ -34,20 +34,20 @@ namespace KingIT
         public virtual DbSet<rent> rent { get; set; }
         public virtual DbSet<statuses> statuses { get; set; }
         public virtual DbSet<tenants> tenants { get; set; }
-        public virtual DbSet<forMalls> forMalls { get; set; }
         public virtual DbSet<CITY> CITY { get; set; }
+        public virtual DbSet<forMalls> forMalls { get; set; }
     
-        public virtual int f_login(string user_login, string user_password)
+        public virtual ObjectResult<Nullable<int>> login_proc(string user_login, string user_pass)
         {
             var user_loginParameter = user_login != null ?
                 new ObjectParameter("user_login", user_login) :
                 new ObjectParameter("user_login", typeof(string));
     
-            var user_passwordParameter = user_password != null ?
-                new ObjectParameter("user_password", user_password) :
-                new ObjectParameter("user_password", typeof(string));
+            var user_passParameter = user_pass != null ?
+                new ObjectParameter("user_pass", user_pass) :
+                new ObjectParameter("user_pass", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("f_login", user_loginParameter, user_passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("login_proc", user_loginParameter, user_passParameter);
         }
     
         public virtual int RentOrBookPavilion(string id_pavilion, Nullable<int> id_shopping_center, Nullable<int> status)
@@ -65,24 +65,6 @@ namespace KingIT
                 new ObjectParameter("status", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RentOrBookPavilion", id_pavilionParameter, id_shopping_centerParameter, statusParameter);
-        }
-    
-        public virtual int setDateRent()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("setDateRent");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> login_proc(string user_login, string user_pass)
-        {
-            var user_loginParameter = user_login != null ?
-                new ObjectParameter("user_login", user_login) :
-                new ObjectParameter("user_login", typeof(string));
-    
-            var user_passParameter = user_pass != null ?
-                new ObjectParameter("user_pass", user_pass) :
-                new ObjectParameter("user_pass", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("login_proc", user_loginParameter, user_passParameter);
         }
     }
 }

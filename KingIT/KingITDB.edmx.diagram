@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc48d90e0f69439694e1524fd71fc989" Name="Diagram1">
+      <Diagram DiagramId="5ef6e4d76e1e427ebc01833427045cf4" Name="Diagram1">
         <EntityTypeShape EntityType="KingITDBModel.employers" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KingITDBModel.halls" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="KingITDBModel.malls" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
@@ -12,6 +12,8 @@
         <EntityTypeShape EntityType="KingITDBModel.rent" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="KingITDBModel.statuses" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KingITDBModel.tenants" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.CITY" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.forMalls" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="KingITDBModel.fk_id_role" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_employers" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_pavilions_shopping_center" ManuallyRouted="false" />
@@ -20,10 +22,6 @@
         <AssociationConnector Association="KingITDBModel.FK_shopping_center_statuses" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_statuses" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_tenants" ManuallyRouted="false" />
-        <AssociationConnector Association="KingITDBModel.fk_id_role1" />
-        <AssociationConnector Association="KingITDBModel.FK_rent_employers1" />
-        <EntityTypeShape EntityType="KingITDBModel.forMalls" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="KingITDBModel.CITY" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

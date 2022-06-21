@@ -21,5 +21,6 @@ namespace KingIT
         public decimal cost { get; set; }
         public int floorsCount { get; set; }
         public decimal valAddedFactor { get; set; }
+        public int idMall { get; set; }
     }
 }
