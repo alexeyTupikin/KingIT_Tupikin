@@ -20,7 +20,7 @@
             <ComboBox x:Name="f_city" SelectionChanged="f_city_SelectionChanged" Margin="5,0,0,0" Width="100">
             </ComboBox>
             <Button x:Name="butt_def_filters" Click="butt_def_filters_Click" Content="X" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="35" Height="25"></Button>
-            <Button x:Name="goIMalls" Click="goIMalls_but_Click" Content="Интерфейс ТЦ"/>
+            <Button x:Name="addMalls" Click="add_but_Click" Content="Добавить ТЦ"/>
         </ToolBar>
         
         <DataGrid x:Name="dataGridMalls" Margin="10,70,10,105" AutoGenerateColumns="False" >

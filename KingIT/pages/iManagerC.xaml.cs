@@ -69,7 +69,7 @@ namespace KingIT.pages
             update_proc();
         }
 
-        private void goIMalls_but_Click(object sender, RoutedEventArgs e)
+        private void add_but_Click(object sender, RoutedEventArgs e)
         {
             addNewMall addNewMallWindow = new addNewMall();
             addNewMallWindow.ShowDialog();

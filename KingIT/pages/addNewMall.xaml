@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="addNewMall" Height="450" Width="800">
     <Grid>
-        <Label Margin="20,20,680,305">Введите название ТЦ:</Label>
+        <Label Content="Введите название ТЦ:" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="title_text" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Выберите статус ТЦ:" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="combo_status" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите кол-во павильенов в ТЦ:" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="qty_halls_text" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите город:" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="city_text" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите стоимость постройки ТЦ:" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="cost_text" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите кол-во этажей:" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="qty_floors_text" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите кф. доп. стоимости ТЦ:" HorizontalAlignment="Left" Margin="220,30,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="kf_dop_cost_text" HorizontalAlignment="Left" Margin="220,60,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="image_button" Click="image_button_Click" Content="Введите фото ТЦ:" HorizontalAlignment="Left" Margin="220,90,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="save_button" Click="save_button_Click" Content="Сохранить:" HorizontalAlignment="Left" Margin="220,360,0,0" VerticalAlignment="Top" Width="120"/>
+        <Image x:Name="image_view" HorizontalAlignment="Left" Height="268" Margin="485,43,0,0" VerticalAlignment="Top" Width="271"/>
+        <Button x:Name="back_button" Click="back_button_Click" Content="Назад" HorizontalAlignment="Left" Margin="450,360,0,0" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Window>
