@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="employers">
           <Key>
             <PropertyRef Name="idEmployer" />
@@ -103,6 +103,7 @@
             <PropertyRef Name="floorsCount" />
             <PropertyRef Name="valAddedFactor" />
             <PropertyRef Name="idMall" />
+            <PropertyRef Name="idStatus" />
           </Key>
           <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="StatusMall" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -112,6 +113,8 @@
           <Property Name="floorsCount" Type="int" Nullable="false" />
           <Property Name="valAddedFactor" Type="decimal" Precision="4" Scale="1" Nullable="false" />
           <Property Name="idMall" Type="int" Nullable="false" />
+          <Property Name="icon" Type="varbinary(max)" />
+          <Property Name="idStatus" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="fk_id_role">
           <End Role="postes" Type="Self.postes" Multiplicity="1">
@@ -248,7 +251,9 @@
     [forMalls].[cost] AS [cost], 
     [forMalls].[floorsCount] AS [floorsCount], 
     [forMalls].[valAddedFactor] AS [valAddedFactor], 
-    [forMalls].[idMall] AS [idMall]
+    [forMalls].[idMall] AS [idMall], 
+    [forMalls].[icon] AS [icon], 
+    [forMalls].[idStatus] AS [idStatus]
     FROM [dbo].[forMalls] AS [forMalls]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="fk_id_role" Association="Self.fk_id_role">
@@ -284,8 +289,7 @@
             <End Role="malls" EntitySet="malls" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -399,6 +403,7 @@
             <PropertyRef Name="floorsCount" />
             <PropertyRef Name="valAddedFactor" />
             <PropertyRef Name="idMall" />
+            <PropertyRef Name="idStatus" />
           </Key>
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StatusMall" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -408,6 +413,8 @@
           <Property Name="floorsCount" Type="Int32" Nullable="false" />
           <Property Name="valAddedFactor" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
           <Property Name="idMall" Type="Int32" Nullable="false" />
+          <Property Name="icon" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idStatus" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="fk_id_role">
           <End Role="postes" Type="Self.postes" Multiplicity="1">
@@ -665,6 +672,8 @@
           <EntitySetMapping Name="forMalls">
             <EntityTypeMapping TypeName="KingITDBModel.forMalls">
               <MappingFragment StoreEntitySet="forMalls">
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="StatusMall" ColumnName="StatusMall" />
                 <ScalarProperty Name="hallsCount" ColumnName="hallsCount" />

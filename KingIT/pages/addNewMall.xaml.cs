@@ -22,14 +22,74 @@ namespace KingIT.pages
     public partial class addNewMall : Window
     {
         public string fullPath = "";
-        public addNewMall()
+        public string w_form = "";
+        public forMalls current_item;
+        public addNewMall(string form_)
         {
-
             InitializeComponent();
+            w_form = form_;
             combo_status.Items.Add("План");
             combo_status.Items.Add("Реализация");
             combo_status.Items.Add("Строительство");
         }
+
+        public addNewMall(forMalls sel_item, MainWindow _mainWindow, string _form)
+        {
+            InitializeComponent();
+            w_form = _form;
+            combo_status.Items.Add("План");
+            combo_status.Items.Add("Реализация");
+            combo_status.Items.Add("Строительство");
+            current_item = sel_item;
+            MainWindow mainWindow = _mainWindow;
+            if (current_item != null)
+            {
+                title_text.Text = current_item.title;
+                combo_status.SelectedValue = current_item.StatusMall;
+                qty_halls_text.Text = Convert.ToString(current_item.hallsCount);
+                city_text.Text = current_item.address;
+                cost_text.Text = Convert.ToString(current_item.cost);
+                qty_floors_text.Text = Convert.ToString(current_item.floorsCount);
+                kf_dop_cost_text.Text = Convert.ToString(current_item.valAddedFactor);
+                image_view.Source = get_set_img.BytesToImage(current_item.icon);
+            }
+            else MessageBox.Show("Для того что бы преступить к редактированию его нужно выделить в таблице.");
+        }
+        //////////
+        public void saveEditMall(forMalls select_item)
+        {
+            forMalls cur_mall = select_item;
+            using (KingITDBEntities cnt = new KingITDBEntities())
+            {
+                malls edit_mall = (from m in cnt.malls where m.idMall == cur_mall.idMall select m).FirstOrDefault();
+                edit_mall.title = title_text.Text;
+                switch (combo_status.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            edit_mall.idStatus = 1;
+                            break;
+                        }
+                    case 1:
+                        {
+                            edit_mall.idStatus = 4;
+                            break;
+                        }
+                    case 2:
+                        {
+                            edit_mall.idStatus = 2;
+                            break;
+                        }
+                }
+                edit_mall.hallsCount = Convert.ToInt32(qty_halls_text.Text);
+                edit_mall.address = city_text.Text;
+                edit_mall.cost = Convert.ToDecimal(cost_text.Text);
+                edit_mall.floorsCount = Convert.ToInt32(qty_floors_text.Text);
+                edit_mall.valAddedFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
+                cnt.SaveChanges();
+            }
+        }
+        ///////
 
         public void saveNewMall()
         {
@@ -64,7 +124,6 @@ namespace KingIT.pages
                 new_mall.icon = get_set_img.GetImageBytes(fullPath);
                 cnt.malls.Add(new_mall);
                 cnt.SaveChanges();
-
             }
         }
 
@@ -86,7 +145,13 @@ namespace KingIT.pages
             {
                 try
                 {
-                    saveNewMall();
+                    if (w_form == "add")
+                    {
+                        saveNewMall();
+                    } else if(w_form == "edit")
+                    {
+                        saveEditMall(current_item);
+                    }
                     MessageBox.Show("Успешно сохранено");
                     this.Close();
                 }

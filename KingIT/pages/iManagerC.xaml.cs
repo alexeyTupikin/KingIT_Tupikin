@@ -22,12 +22,12 @@ namespace KingIT.pages
     public partial class iManagerC : Page
     {
         MainWindow mainWindow;
+        string form = "";
         public iManagerC(MainWindow _mainWindow)
         {
             InitializeComponent();
             mainWindow = _mainWindow;
             dataGridUpdate();
-
         }
 
         public void dataGridUpdate()
@@ -71,7 +71,8 @@ namespace KingIT.pages
 
         private void add_but_Click(object sender, RoutedEventArgs e)
         {
-            addNewMall addNewMallWindow = new addNewMall();
+            form = "add";
+            addNewMall addNewMallWindow = new addNewMall(form);
             addNewMallWindow.ShowDialog();
             if(addNewMallWindow.IsActive == false)
             {
@@ -176,6 +177,17 @@ namespace KingIT.pages
             catch (Exception X)
             {
                 MessageBox.Show("Ошибка"+ X.Message);
+            }
+        }
+
+        private void edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            form = "edit";
+            addNewMall editNewMallWindow = new addNewMall((forMalls)(dataGridMalls.SelectedItem), mainWindow, form);
+            editNewMallWindow.ShowDialog();
+            if (editNewMallWindow.IsActive == false)
+            {
+                update_proc();
             }
         }
     }

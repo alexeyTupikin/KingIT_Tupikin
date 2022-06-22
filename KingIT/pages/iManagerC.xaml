@@ -20,7 +20,6 @@
             <ComboBox x:Name="f_city" SelectionChanged="f_city_SelectionChanged" Margin="5,0,0,0" Width="100">
             </ComboBox>
             <Button x:Name="butt_def_filters" Click="butt_def_filters_Click" Content="X" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="35" Height="25"></Button>
-            <Button x:Name="addMalls" Click="add_but_Click" Content="Добавить ТЦ"/>
         </ToolBar>
         
         <DataGrid x:Name="dataGridMalls" Margin="10,70,10,105" AutoGenerateColumns="False" >
@@ -36,6 +35,8 @@
         </DataGrid>
         
         <ToolBar Height="30" Margin="10,391,10,10">
+            <Button x:Name="addMalls" Click="add_but_Click" Content="Добавить ТЦ" Margin="10,0,0,0" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="edit_button" Click="edit_button_Click" Content="Редактировать" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="94" Height="30"/>
             <Button x:Name="delete_button" Content="Удалить" Click="delete_button_Click" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="94" Height="30"/>
         </ToolBar>
     </Grid>

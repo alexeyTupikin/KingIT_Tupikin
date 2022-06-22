@@ -22,5 +22,7 @@ namespace KingIT
         public int floorsCount { get; set; }
         public decimal valAddedFactor { get; set; }
         public int idMall { get; set; }
+        public byte[] icon { get; set; }
+        public int idStatus { get; set; }
     }
 }
