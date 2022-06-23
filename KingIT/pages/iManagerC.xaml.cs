@@ -40,7 +40,7 @@ namespace KingIT.pages
                 f_Status.Items.Add("План");
                 f_Status.Items.Add("Реализация");
                 f_Status.Items.Add("Строительство");
-                f_city.ItemsSource = (from m in cnt.malls select m.address).Distinct().ToList();
+                f_city.ItemsSource = (from m in cnt.CITY select m.address).Distinct().ToList();
             }
         }
 
@@ -150,45 +150,57 @@ namespace KingIT.pages
 
         private void delete_button_Click(object sender, RoutedEventArgs e)
         {
-            var selObject = (forMalls)dataGridMalls.SelectedItem;
-            try
+            if (dataGridMalls.SelectedItem != null)
             {
-                using (KingITDBEntities cnt = new KingITDBEntities())
+                var selObject = (forMalls)dataGridMalls.SelectedItem;
+                try
                 {
-                    malls delObject = (from m in cnt.malls
-                                       where m.idMall == selObject.idMall
-                                       select m).FirstOrDefault();
-                    delObject.idStatus = 3;
-                    cnt.SaveChanges();
-                    if((f_Status.SelectedValue == null)&& (f_city.SelectedValue != null))
+                    using (KingITDBEntities cnt = new KingITDBEntities())
                     {
-                        update_w_f_city();
-                    }
-                    else if((f_city.SelectedValue == null) && (f_Status.SelectedValue != null))
-                    {
-                        update_w_f_status();
-                    }
-                    else if ((f_Status.SelectedValue == null) && (f_city.SelectedValue == null))
-                    {
-                        dataGridUpdate();
+                        malls delObject = (from m in cnt.malls
+                                           where m.idMall == selObject.idMall
+                                           select m).FirstOrDefault();
+                        delObject.idStatus = 3;
+                        cnt.SaveChanges();
+                        if ((f_Status.SelectedValue == null) && (f_city.SelectedValue != null))
+                        {
+                            update_w_f_city();
+                        }
+                        else if ((f_city.SelectedValue == null) && (f_Status.SelectedValue != null))
+                        {
+                            update_w_f_status();
+                        }
+                        else if ((f_Status.SelectedValue == null) && (f_city.SelectedValue == null))
+                        {
+                            dataGridUpdate();
+                        }
                     }
                 }
-            }
-            catch (Exception X)
-            {
-                MessageBox.Show("Ошибка"+ X.Message);
-            }
+                catch (Exception X)
+                {
+                    MessageBox.Show("Ошибка" + X.Message);
+                }
+            } else MessageBox.Show("Для того что бы преступить к удалению элемента его нужно выделить в таблице.");
         }
 
         private void edit_button_Click(object sender, RoutedEventArgs e)
         {
-            form = "edit";
-            addNewMall editNewMallWindow = new addNewMall((forMalls)(dataGridMalls.SelectedItem), mainWindow, form);
-            editNewMallWindow.ShowDialog();
-            if (editNewMallWindow.IsActive == false)
+            if (dataGridMalls.SelectedItem != null)
             {
-                update_proc();
+                form = "edit";
+                addNewMall editNewMallWindow = new addNewMall((forMalls)(dataGridMalls.SelectedItem), mainWindow, form);
+                editNewMallWindow.ShowDialog();
+                if (editNewMallWindow.IsActive == false)
+                {
+                    update_proc();
+                }
             }
+            else MessageBox.Show("Для того что бы преступить к редактированию элемента его нужно выделить в таблице.");
+        }
+
+        private void goIHalls_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.frame.Navigate(new pages.iHalls());
         }
     }
 }
