@@ -22,6 +22,7 @@ namespace KingIT
         public int idStatus { get; set; }
         public System.DateTime dateStart { get; set; }
         public System.DateTime dateEnd { get; set; }
+        public int idHall { get; set; }
     
         public virtual employers employers { get; set; }
         public virtual halls halls { get; set; }

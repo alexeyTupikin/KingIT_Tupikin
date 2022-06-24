@@ -12,17 +12,8 @@ namespace KingIT
     using System;
     using System.Collections.Generic;
     
-    public partial class forMalls
+    public partial class City_p
     {
-        public string title { get; set; }
-        public string StatusMall { get; set; }
-        public int hallsCount { get; set; }
         public string address { get; set; }
-        public decimal cost { get; set; }
-        public int floorsCount { get; set; }
-        public decimal valAddFactor { get; set; }
-        public int idMall { get; set; }
-        public byte[] icon { get; set; }
-        public int idStatus { get; set; }
     }
 }

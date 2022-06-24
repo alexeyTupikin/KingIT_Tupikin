@@ -49,10 +49,10 @@ namespace KingIT
                     last_name = fio[0];
                     name = fio[1];
                     second_name = fio[2];
-                using (KingITDBEntities cnt = new KingITDBEntities())
+                using (KingITDBEntities1 cnt = new KingITDBEntities1())
                 {
-                        buf_id = (from e in cnt.employers where e.lastName == last_name && 
-                                  e.name == name && e.middleName == second_name 
+                        buf_id = (from e in cnt.employers where e.surname == last_name && 
+                                  e.name == name && e.middlename == second_name 
                                   select e.idEmployer).FirstOrDefault();
 
                         var current_ = (from e in cnt.employers where e.idEmployer == buf_id select e).FirstOrDefault();
@@ -73,7 +73,7 @@ namespace KingIT
                 .ForEach(f =>
                 {
                     title_mall = System.IO.Path.GetFileName(f.TrimEnd(end_name));
-                    using (KingITDBEntities cnt1 = new KingITDBEntities())
+                    using (KingITDBEntities1 cnt1 = new KingITDBEntities1())
                     {
                         buf_id = (from e in cnt1.malls
                                   where e.title == title_mall

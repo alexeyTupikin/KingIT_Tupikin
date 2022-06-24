@@ -21,12 +21,13 @@ namespace KingIT
         }
     
         public string hallNum { get; set; }
-        public int idMail { get; set; }
+        public int idMall { get; set; }
         public int floor { get; set; }
         public int status { get; set; }
         public decimal area { get; set; }
         public decimal cost { get; set; }
-        public decimal valAddedFactor { get; set; }
+        public decimal valAddFactor { get; set; }
+        public int idHall { get; set; }
     
         public virtual malls malls { get; set; }
         public virtual statuses statuses { get; set; }

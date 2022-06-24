@@ -4,16 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5ef6e4d76e1e427ebc01833427045cf4" Name="Diagram1">
-        <EntityTypeShape EntityType="KingITDBModel.employers" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="67d25c34fc564e5690eef36fac42f8a7" Name="Diagram1">
+        <EntityTypeShape EntityType="KingITDBModel.employers" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="KingITDBModel.halls" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.malls" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.postes" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.rent" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.statuses" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.tenants" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.CITY" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KingITDBModel.forMalls" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.malls" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.postes" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.rent" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.statuses" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.tenants" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.City_p" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.forMalls" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingITDBModel.getHallsView" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="KingITDBModel.fk_id_role" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_rent_employers" ManuallyRouted="false" />
         <AssociationConnector Association="KingITDBModel.FK_pavilions_shopping_center" ManuallyRouted="false" />

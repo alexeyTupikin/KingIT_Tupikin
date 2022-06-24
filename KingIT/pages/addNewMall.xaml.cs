@@ -48,7 +48,7 @@ namespace KingIT.pages
             city_text.Text = current_item.address;
             cost_text.Text = Convert.ToString(current_item.cost);
             qty_floors_text.Text = Convert.ToString(current_item.floorsCount);
-            kf_dop_cost_text.Text = Convert.ToString(current_item.valAddedFactor);
+            kf_dop_cost_text.Text = Convert.ToString(current_item.valAddFactor);
             if(current_item.icon != null)
 
             {
@@ -60,7 +60,7 @@ namespace KingIT.pages
         public void saveEditMall(forMalls select_item)
         {
             forMalls cur_mall = select_item;
-            using (KingITDBEntities cnt = new KingITDBEntities())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1())
             {
                 malls edit_mall = (from m in cnt.malls where m.idMall == cur_mall.idMall select m).FirstOrDefault();
                 if ((title_text.Text.Trim(' ') != "") && (combo_status.SelectedValue != null) &&
@@ -91,7 +91,7 @@ namespace KingIT.pages
                     edit_mall.address = city_text.Text;
                     edit_mall.cost = Convert.ToDecimal(cost_text.Text);
                     edit_mall.floorsCount = Convert.ToInt32(qty_floors_text.Text);
-                    edit_mall.valAddedFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
+                    edit_mall.valAddFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
                     edit_mall.icon = get_set_img.GetImageBytes(fullPath);
                     cnt.SaveChanges();
                 }
@@ -103,7 +103,7 @@ namespace KingIT.pages
         public void saveNewMall()
         {
             malls new_mall = new malls();
-            using (KingITDBEntities cnt = new KingITDBEntities())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1())
             {
                 new_mall.idMall = ((from m in cnt.malls select m.idMall).Max()) + 1;
                 new_mall.title = title_text.Text;
@@ -129,7 +129,7 @@ namespace KingIT.pages
                 new_mall.address = city_text.Text;
                 new_mall.cost = Convert.ToDecimal(cost_text.Text);
                 new_mall.floorsCount = Convert.ToInt32(qty_floors_text.Text);
-                new_mall.valAddedFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
+                new_mall.valAddFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
                 new_mall.icon = get_set_img.GetImageBytes(fullPath);
                 cnt.malls.Add(new_mall);
                 cnt.SaveChanges();

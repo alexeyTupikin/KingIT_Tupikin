@@ -30,13 +30,13 @@ namespace KingIT.pages
 
         private void login_ac_Click(object sender, RoutedEventArgs e)
         {
-            using (KingITDBEntities cnt = new KingITDBEntities())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1())
             {
-                var check_acc = cnt.login_proc(login_text.Text, pass_text.Password).FirstOrDefault();
+                var check_acc = (from emp in cnt.employers where emp.login == login_text.Text && emp.password == pass_text.Password select emp.idEmployer).FirstOrDefault();
                 if (check_acc != null)
                 {
                     //реализация перехода на нужную форму исходя их id и роли пользователя
-                    using (KingITDBEntities db = new KingITDBEntities())
+                    using (KingITDBEntities1 db = new KingITDBEntities1())
                     {
                         var buf_position = (from emp in db.employers where emp.idEmployer == check_acc select emp.idPost).FirstOrDefault();
                         switch (buf_position)
