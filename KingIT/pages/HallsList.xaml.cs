@@ -27,8 +27,8 @@ namespace KingIT.pages
         public HallsList(MainWindow _main, malls _currentMall)
         {
             InitializeComponent();
-            main.Title = "Павильоны";
             main = _main;
+            main.Title = "Павильоны";
             currentMall = _currentMall;
             FillDataGrid();
             FillFloorBox();
@@ -93,7 +93,8 @@ namespace KingIT.pages
                     main.frame.Navigate(new EditHallList(main, edited, currentMall));
                 }
             }
-            catch { }
+            catch (Exception ex) { MessageBox.Show("Ошибка открытия окна\n" + ex.Message); }
+            FillDataGrid();
 
         }
         private void Delete(object sender, RoutedEventArgs e)
@@ -104,22 +105,18 @@ namespace KingIT.pages
                 using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     var deleted = (from h in db.halls
-                                   where h.idMall == selected.idHall
+                                   where h.idHall == selected.idHall
                                    select h).FirstOrDefault();
-                    deleted.status = 3;
-                    db.SaveChanges();
+                    if (deleted.status == 5)
+                    {
+                        deleted.status = 3;
+                        db.SaveChanges();
+                        FillDataGrid();
+                    }
+                    else MessageBox.Show("Павильон арендован или забронирован");
                 }
             }
-            catch { }
-            try
-            {
-                DoFilters(
-                FloorCB.SelectedIndex == -1 ? "..." : Convert.ToString(FloorCB.SelectedValue),
-                decimal.TryParse(AreaBoxMin.Text, out var i) ? Convert.ToDecimal(AreaBoxMin.Text) : 0,
-                decimal.TryParse(AreaBoxMax.Text, out i) ? Convert.ToDecimal(AreaBoxMax.Text) : 500,
-                StatusCB.SelectedIndex == -1 ? "..." : Convert.ToString(StatusCB.SelectedValue));
-            }
-            catch { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void DoFilters(string floor, decimal min, decimal max, string status_title)
         {

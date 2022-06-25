@@ -29,8 +29,8 @@ namespace KingIT.pages
         public iManagerC(MainWindow _mainWindow)
         {
             InitializeComponent();
-            mainWindow.Title = "Торговые центры";
             mainWindow = _mainWindow;
+            mainWindow.Title = "Торговые центры";
             dataGridUpdate();
         }
 
@@ -204,12 +204,15 @@ namespace KingIT.pages
 
         private void goIHalls_Click(object sender, RoutedEventArgs e)
         {
-            var cur_mall = (forMalls)dataGridMalls.SelectedItem;
-            int buf = cur_mall.idMall; 
-            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
+            if(dataGridMalls.SelectedValue != null)
             {
-                malls malls_obj = (from m in cnt.malls where m.idMall == buf select m).FirstOrDefault();
-                mainWindow.frame.Navigate(new pages.HallsList(mainWindow, malls_obj));
+                var cur_mall = (forMalls)dataGridMalls.SelectedItem;
+                int buf = cur_mall.idMall;
+                using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
+                {
+                    malls malls_obj = (from m in cnt.malls where m.idMall == buf select m).FirstOrDefault();
+                    mainWindow.frame.Navigate(new pages.HallsList(mainWindow, malls_obj));
+                }
             }
         }
     }
