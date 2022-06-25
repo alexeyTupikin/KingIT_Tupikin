@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KingIT.Model;
 
 namespace KingIT.pages
 {
@@ -25,6 +26,7 @@ namespace KingIT.pages
         public login(MainWindow _mainWindow)
         {
             InitializeComponent();
+            mainWindow.Title = "Авторизация";
             mainWindow = _mainWindow;
         }
 

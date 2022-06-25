@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class postes
+    public partial class getHallsView
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public postes()
-        {
-            this.employers = new HashSet<employers>();
-        }
-    
-        public int idPost { get; set; }
+        public int idStatus { get; set; }
         public string title { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employers> employers { get; set; }
+        public int floor { get; set; }
+        public string hallNum { get; set; }
+        public int idMall { get; set; }
+        public decimal area { get; set; }
+        public int status { get; set; }
+        public decimal valAddFactor { get; set; }
+        public decimal cost { get; set; }
+        public int idHall { get; set; }
     }
 }

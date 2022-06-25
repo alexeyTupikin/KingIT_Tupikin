@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="employers">
           <Key>
             <PropertyRef Name="idEmployer" />
@@ -258,7 +258,7 @@
                 <Property Name="idMall" Type="int" Nullable="false" />
                 <Property Name="area" Type="decimal" Precision="5" Scale="1" Nullable="false" />
                 <Property Name="hall_status" Type="nvarchar" MaxLength="50" />
-                <Property Name="valAddFactor" Type="decimal" Precision="5" Scale="1" Nullable="false" />
+                <Property Name="valAddedFactor" Type="decimal" Precision="5" Scale="1" Nullable="false" />
                 <Property Name="cost" Type="decimal" Precision="5" Scale="1" Nullable="false" />
                 <Property Name="idHall" Type="int" Nullable="false" />
               </RowType>
@@ -378,7 +378,8 @@
             <End Role="malls" EntitySet="malls" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -390,7 +391,7 @@
           <Property Name="idMall" Type="Int32" Nullable="false" />
           <Property Name="area" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
           <Property Name="hall_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="valAddFactor" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
+          <Property Name="valAddedFactor" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
           <Property Name="cost" Type="Decimal" Precision="5" Scale="1" Nullable="false" />
           <Property Name="idHall" Type="Int32" Nullable="false" />
         </ComplexType>
@@ -654,7 +655,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="KingITDBEntities11" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="KingITDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="employers" EntityType="Self.employers" />
           <EntitySet Name="halls" EntityType="Self.halls" />
           <EntitySet Name="malls" EntityType="Self.malls" />
@@ -702,6 +703,10 @@
           </FunctionImport>
           <FunctionImport Name="getMalls" IsComposable="true" ReturnType="Collection(KingITDBModel.getMalls_Result)" />
           <FunctionImport Name="change_rent_date" />
+          <FunctionImport Name="login_proc" ReturnType="Collection(Int32)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="rent_pavilion">
             <Parameter Name="action" Mode="In" Type="String" />
             <Parameter Name="date_start" Mode="In" Type="DateTime" />
@@ -727,7 +732,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище KingITDBModelContainer" CdmEntityContainer="KingITDBEntities11">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KingITDBModelContainer" CdmEntityContainer="KingITDBEntities1">
           <EntitySetMapping Name="employers">
             <EntityTypeMapping TypeName="KingITDBModel.employers">
               <MappingFragment StoreEntitySet="employers">
@@ -863,7 +868,7 @@
                 <ScalarProperty Name="idMall" ColumnName="idMall" />
                 <ScalarProperty Name="area" ColumnName="area" />
                 <ScalarProperty Name="hall_status" ColumnName="hall_status" />
-                <ScalarProperty Name="valAddFactor" ColumnName="valAddFactor" />
+                <ScalarProperty Name="valAddedFactor" ColumnName="valAddedFactor" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
                 <ScalarProperty Name="idHall" ColumnName="idHall" />
               </ComplexTypeMapping>
@@ -884,6 +889,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="change_rent_date" FunctionName="Хранилище KingITDBModel.change_rent_date" />
+          <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
           <FunctionImportMapping FunctionImportName="rent_pavilion" FunctionName="Хранилище KingITDBModel.rent_pavilion" />
           <FunctionImportMapping FunctionImportName="RentOrBookPavilionInMall" FunctionName="Хранилище KingITDBModel.RentOrBookPavilionInMall" />
         </EntityContainerMapping>

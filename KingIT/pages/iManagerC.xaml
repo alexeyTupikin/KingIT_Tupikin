@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:KingIT.pages"
       mc:Ignorable="d" 
       Height="450" Width="800"
-      Title="iManagerC">
+      Title="Торговые  центры">
 
     <Grid>
         <ToolBar  Margin="10,10,10,415" Height="30">
@@ -31,7 +31,7 @@
                 <DataGridTextColumn MinWidth="100" Binding="{Binding address}" Header="Город"/>
                 <DataGridTextColumn MinWidth="30" Binding="{Binding cost}" Header="Стоимость постройки"/>
                 <DataGridTextColumn MinWidth="30" Binding="{Binding floorsCount}" Header="Кол-во этажей"/>
-                <DataGridTextColumn MinWidth="30" Binding="{Binding valAddedFactor}" Header="Кф. доп. стоимости"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding valAddFactor}" Header="Кф. доп. стоимости"/>
             </DataGrid.Columns>
         </DataGrid>
         

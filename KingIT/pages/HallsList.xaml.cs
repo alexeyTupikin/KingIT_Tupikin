@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KingIT.Model;
 
 namespace KingIT.pages
 {
@@ -26,6 +27,7 @@ namespace KingIT.pages
         public HallsList(MainWindow _main, malls _currentMall)
         {
             InitializeComponent();
+            main.Title = "Павильоны";
             main = _main;
             currentMall = _currentMall;
             FillDataGrid();
@@ -36,7 +38,7 @@ namespace KingIT.pages
         {
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     var list = (from h in db.halls
                                 where h.idMall == currentMall.idMall
@@ -45,7 +47,7 @@ namespace KingIT.pages
                     list.Add("...");
                     FloorCB.ItemsSource = list;
                 }
-            }
+            } 
             catch
             {
                 MessageBox.Show("Ошибка подключения к бд");
@@ -62,7 +64,7 @@ namespace KingIT.pages
         {
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     DG.ItemsSource = (from h in db.getHalls(currentMall.idMall) select h).ToList();
                 }
@@ -82,7 +84,7 @@ namespace KingIT.pages
             var selected = (getHalls_Result)DG.SelectedItem;
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     var edited = (from h in db.halls
                                   where h.hallNum == selected.hallNum &&
@@ -99,7 +101,7 @@ namespace KingIT.pages
             var selected = (getHalls_Result)DG.SelectedItem;
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     var deleted = (from h in db.halls
                                    where h.idMall == selected.idHall
@@ -123,7 +125,7 @@ namespace KingIT.pages
         {
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     int ifloor = 0;
                     if (floor != "...")

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
     using System.Data.Entity;
@@ -21,7 +21,11 @@ namespace KingIT
             : base("name=KingITDBEntities1")
         {
         }
-    
+        public KingITDBEntities1(string s)
+            : base(s)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -57,6 +61,19 @@ namespace KingIT
         public virtual int change_rent_date()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("change_rent_date");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> login_proc(string login, string password)
+        {
+            var loginParameter = login != null ?
+                new ObjectParameter("login", login) :
+                new ObjectParameter("login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("login_proc", loginParameter, passwordParameter);
         }
     
         public virtual int rent_pavilion(string action, Nullable<System.DateTime> date_start, Nullable<System.DateTime> date_end, Nullable<int> idTenant, Nullable<int> idHall, Nullable<int> idMall, Nullable<int> idEmployer, string hallNum)

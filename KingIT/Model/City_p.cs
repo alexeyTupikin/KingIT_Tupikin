@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
     using System.Collections.Generic;

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KingIT.Model;
 
 namespace KingIT.pages
 {
@@ -95,7 +96,7 @@ namespace KingIT.pages
         {
             try
             {
-                using (var db = new KingITDBEntities1())
+                using (var db = new KingITDBEntities1(main.connectionName))
                 {
                     if (currentHall == null) //Если добавление
                     {

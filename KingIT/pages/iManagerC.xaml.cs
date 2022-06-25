@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity;
 using KingIT.pages;
+using KingIT.Model;
+
 
 namespace KingIT.pages
 {
@@ -27,13 +29,14 @@ namespace KingIT.pages
         public iManagerC(MainWindow _mainWindow)
         {
             InitializeComponent();
+            mainWindow.Title = "Торговые центры";
             mainWindow = _mainWindow;
             dataGridUpdate();
         }
 
         public void dataGridUpdate()
         {
-            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
                 var data = (from m in cnt.forMalls orderby m.address, m.StatusMall select m);
                 dataGridMalls.ItemsSource = data.ToList();
@@ -47,7 +50,7 @@ namespace KingIT.pages
 
         public void update_proc()
         {
-            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
                 cnt.SaveChanges();
                 if ((f_Status.SelectedValue == null) && (f_city.SelectedValue != null))
@@ -88,7 +91,7 @@ namespace KingIT.pages
 
         public void update_w_f_status()
         {
-            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
                 string buf_status = Convert.ToString(f_Status.SelectedValue);
                 if (f_city.SelectedValue != null)
@@ -102,7 +105,7 @@ namespace KingIT.pages
                 }
                 else
                 {
-                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1())
+                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1(mainWindow.connectionName))
                     {
                         var data = (from m in cnt12.forMalls where m.StatusMall == buf_status orderby m.address, m.StatusMall select m);
                         dataGridMalls.ItemsSource = data.ToList();
@@ -113,13 +116,13 @@ namespace KingIT.pages
 
         public void update_w_f_city()
         {
-            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
                 string buf_city = Convert.ToString(f_city.SelectedValue);
                 if (f_Status.SelectedValue != null)
                 {
                     string buf_status = Convert.ToString(f_Status.SelectedValue);
-                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1())
+                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1(mainWindow.connectionName))
                     {
                         var data = (from m in cnt12.forMalls where m.StatusMall == buf_status && m.address == buf_city orderby m.address, m.StatusMall select m);
                         dataGridMalls.ItemsSource = data.ToList();
@@ -127,7 +130,7 @@ namespace KingIT.pages
                 }
                 else
                 {
-                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1())
+                    using (KingITDBEntities1 cnt12 = new KingITDBEntities1(mainWindow.connectionName))
                     {
                         var data = (from m in cnt12.forMalls where m.address == buf_city orderby m.address, m.StatusMall select m);
                         dataGridMalls.ItemsSource = data.ToList();
@@ -156,7 +159,7 @@ namespace KingIT.pages
                 var selObject = (forMalls)dataGridMalls.SelectedItem;
                 try
                 {
-                    using (KingITDBEntities1 cnt = new KingITDBEntities1())
+                    using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
                     {
                         malls delObject = (from m in cnt.malls
                                            where m.idMall == selObject.idMall
@@ -203,9 +206,9 @@ namespace KingIT.pages
         {
             var cur_mall = (forMalls)dataGridMalls.SelectedItem;
             int buf = cur_mall.idMall; 
-            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
-                var malls_obj = (from m in cnt.malls where m.idMall == buf select m).FirstOrDefault();
+                malls malls_obj = (from m in cnt.malls where m.idMall == buf select m).FirstOrDefault();
                 mainWindow.frame.Navigate(new pages.HallsList(mainWindow, malls_obj));
             }
         }

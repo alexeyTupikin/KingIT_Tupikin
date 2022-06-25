@@ -7,19 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class getMalls_Result
+    public partial class forMalls
     {
-        public int idMall { get; set; }
         public string title { get; set; }
-        public string status_title { get; set; }
+        public string StatusMall { get; set; }
         public int hallsCount { get; set; }
         public string address { get; set; }
         public decimal cost { get; set; }
         public int floorsCount { get; set; }
         public decimal valAddFactor { get; set; }
+        public int idMall { get; set; }
+        public byte[] icon { get; set; }
+        public int idStatus { get; set; }
     }
 }

@@ -7,22 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class getHallsView
+    public partial class rent
     {
-        public int idStatus { get; set; }
-        public string title { get; set; }
-        public int floor { get; set; }
-        public string hallNum { get; set; }
+        public int idRent { get; set; }
+        public int idTenant { get; set; }
         public int idMall { get; set; }
-        public decimal area { get; set; }
-        public int status { get; set; }
-        public decimal valAddFactor { get; set; }
-        public decimal cost { get; set; }
+        public int idEmployer { get; set; }
+        public string hallNum { get; set; }
+        public int idStatus { get; set; }
+        public System.DateTime dateStart { get; set; }
+        public System.DateTime dateEnd { get; set; }
         public int idHall { get; set; }
+    
+        public virtual employers employers { get; set; }
+        public virtual halls halls { get; set; }
+        public virtual statuses statuses { get; set; }
+        public virtual tenants tenants { get; set; }
     }
 }

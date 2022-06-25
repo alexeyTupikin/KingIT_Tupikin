@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.IO;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using KingIT.Model;
 
 namespace KingIT.pages
 {

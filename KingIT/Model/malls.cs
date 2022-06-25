@@ -7,25 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KingIT
+namespace KingIT.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tenants
+    public partial class malls
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tenants()
+        public malls()
         {
-            this.rent = new HashSet<rent>();
+            this.halls = new HashSet<halls>();
         }
     
-        public int idTenant { get; set; }
+        public int idMall { get; set; }
         public string title { get; set; }
-        public string contactPhone { get; set; }
+        public int idStatus { get; set; }
+        public int hallsCount { get; set; }
         public string address { get; set; }
+        public decimal cost { get; set; }
+        public decimal valAddFactor { get; set; }
+        public int floorsCount { get; set; }
+        public byte[] icon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rent> rent { get; set; }
+        public virtual ICollection<halls> halls { get; set; }
+        public virtual statuses statuses { get; set; }
     }
 }

@@ -14,109 +14,109 @@ Title="HallsList">
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel
-Grid.Row="0"
-Orientation="Horizontal">
+          Grid.Row="0"
+          Orientation="Horizontal">
             <ComboBox
-Width="200"
-Height="25"
-Margin="20,0,5,0"
-x:Name="FloorCB"
-SelectionChanged="CB_SelectionChanged"/>
+              Width="200"
+              Height="25"
+              Margin="20,0,5,0"
+              x:Name="FloorCB"
+              SelectionChanged="CB_SelectionChanged"/>
             <TextBox
-x:Name="AreaBoxMin"
-Text="0"
-Width="50"
-Margin="5,0,0,0"
-Height="25"
-TextChanged="AreaBox_TextChanged"/>
+              x:Name="AreaBoxMin"
+              Text="0"              
+              Width="50"
+              Margin="5,0,0,0"
+              Height="25"
+              TextChanged="AreaBox_TextChanged"/>
             <TextBox
-x:Name="AreaBoxMax"
-Text="500"
-Width="50"
-Margin="5,0,0,0"
-Height="25"
-TextChanged="AreaBox_TextChanged"/>
+              x:Name="AreaBoxMax"
+              Text="500"
+              Width="50"
+              Margin="5,0,0,0"
+              Height="25"
+              TextChanged="AreaBox_TextChanged"/>
             <ComboBox
-Width="120"
-Height="25"
-Margin="20,0,5,0"
-x:Name="StatusCB"
-SelectionChanged="CB_SelectionChanged"/>
+              Width="120"
+              Height="25"
+              Margin="20,0,5,0"
+              x:Name="StatusCB"
+              SelectionChanged="CB_SelectionChanged"/>
             <Button
-Width="100"
-Content="Удалить"
-Height="25"
-Margin="20,0,0,0"
-Click="Delete"
-IsEnabled="False"
-x:Name="DelButton"/>
+              Width="100"
+              Content="Удалить"
+              Height="25"
+              Margin="20,0,0,0"
+              Click="Delete"
+              IsEnabled="False"
+              x:Name="DelButton"/>
             <Button
-Margin="20,0,0,0"
-Width="100"
-Content="Редактировать"
-Click="Edit"
-IsEnabled="False"
-x:Name="EditButton"/>
+              Margin="20,0,0,0"
+              Width="100"
+              Content="Редактировать"
+              Click="Edit"
+              IsEnabled="False"
+              x:Name="EditButton"/>
         </StackPanel>
         <StackPanel
-Grid.Row="1"
-Margin="20,0,20,0">
+              Grid.Row="1"
+              Margin="20,0,20,0">
             <DataGrid
-x:Name="DG"
-CanUserAddRows="False"
-CanUserDeleteRows="False"
-CanUserResizeRows="False"
-IsReadOnly="True"
-SelectedCellsChanged="DG_SelectedCellsChanged"
-Height="345"
-AutoGenerateColumns="False"
-ScrollViewer.VerticalScrollBarVisibility="Visible">
+              x:Name="DG"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserResizeRows="False"
+              IsReadOnly="True"
+              SelectedCellsChanged="DG_SelectedCellsChanged"
+              Height="345"
+              AutoGenerateColumns="False"
+              ScrollViewer.VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTextColumn
-Header="Статус ТЦ"
-Binding="{Binding mall_status}"
-Width="*"/>
+                      Header="Статус ТЦ"
+                      Binding="{Binding mall_status}"
+                      Width="*"/>
                     <DataGridTextColumn
-Header="Название ТЦ"
-Binding="{Binding title}"
-Width="*"/>
+                      Header="Название ТЦ"
+                      Binding="{Binding title}"
+                      Width="*"/>
                     <DataGridTextColumn
-Header="Этаж"
-Binding="{Binding floor}"
-Width="50"/>
+                      Header="Этаж"
+                      Binding="{Binding floor}"
+                      Width="50"/>
                     <DataGridTextColumn
-Header="Номер"
-Binding="{Binding hall_number}"
-Width="50"/>
+                      Header="Номер"
+                      Binding="{Binding hallNum}"
+                      Width="50"/>
                     <DataGridTextColumn
-Header="Площадь"
-Binding="{Binding area}"
-Width="*"/>
+                      Header="Площадь"
+                      Binding="{Binding area}"
+                      Width="*"/>
                     <DataGridTextColumn
-Header="Статус"
-Binding="{Binding hall_status}"
-Width="*"/>
+                      Header="Статус"
+                      Binding="{Binding hall_status}"
+                      Width="*"/>
                     <DataGridTextColumn
-Header="Коэф"
-Width="40"
-Binding="{Binding value_added_factor}"/>
+                      Header="Коэф"
+                      Width="40"
+                      Binding="{Binding valAddFactor}"/>
                     <DataGridTextColumn
-Header="Стоимость за кв2"
-Width="*"
-Binding="{Binding cost}"/>
+                      Header="Стоимость за кв2"
+                      Width="*"
+                      Binding="{Binding cost}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
         <StackPanel
-Orientation="Horizontal"
-Grid.Row="2" >
+          Orientation="Horizontal"
+          Grid.Row="2" >
             <Button
-Content="Назад"
-Click="Exit"/>
+              Content="Назад"
+              Click="Exit"/>
             <Button
-Margin="360,0,0,0"
-Content="Добавить"
-Click="Add"/>
+              Margin="360,0,0,0"
+              Content="Добавить"
+              Click="Add"/>
         </StackPanel>
     </Grid>
 </Page>

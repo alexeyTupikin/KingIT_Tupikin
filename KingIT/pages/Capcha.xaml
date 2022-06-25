@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KingIT.pages"
         mc:Ignorable="d"
-        Title="Capcha" Height="382" Width="349">
+        Title="Captcha" Height="382" Width="349">
     <Grid>
         <Image x:Name="imgCapcha" Width="200"
                Height="200"
