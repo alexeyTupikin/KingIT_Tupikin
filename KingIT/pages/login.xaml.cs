@@ -37,6 +37,7 @@ namespace KingIT.pages
                 var check_acc = (from emp in cnt.employers where emp.login == login_text.Text && emp.password == pass_text.Password select emp.idEmployer).FirstOrDefault();
                 if (check_acc != null)
                 {
+                    mainWindow.employer_id = check_acc;
                     //реализация перехода на нужную форму исходя их id и роли пользователя
                     using (KingITDBEntities1 db = new KingITDBEntities1())
                     {
@@ -45,6 +46,8 @@ namespace KingIT.pages
                         {
                             case 1: //Admin
                                 {
+                                    MessageBox.Show("Ваш тип пользователя: Админ");
+                                    mainWindow.frame.Navigate(new pages.Admin.iAdmin(mainWindow));
                                     break;
                                 }
                             case 2: //Manager A

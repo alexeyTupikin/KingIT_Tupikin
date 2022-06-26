@@ -1,0 +1,31 @@
+﻿<Page x:Class="KingIT.pages.Admin.iAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KingIT.pages.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="iAdmin">
+
+    <Grid>
+        <ToolBar VerticalAlignment="Top" Margin="10" Height="30">
+        </ToolBar>
+        <DataGrid x:Name="dataGridEmp" Margin="10,50,10,100" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="120" Binding="{Binding surname}" Header="Фамилия"/>
+                <DataGridTextColumn MinWidth="50" Binding="{Binding name}" Header="Имя"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding middlename}" Header="Отчество"/>
+                <DataGridTextColumn MinWidth="100" Binding="{Binding login}" Header="Логин"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding password}" Header="Пароль"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding sex}" Header="Пол"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding title}" Header="Роль"/>
+                <DataGridTextColumn MinWidth="30" Binding="{Binding phone}" Header="Номер телефона"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ToolBar VerticalAlignment="Bottom" Margin="10,0,10,60" Height="30">
+            <Button x:Name="add_but" Click="add_but_Click" Margin="5" Content="Добавить" Width="100" Height="25"/>
+            <Button x:Name="edit_but" Click="edit_but_Click" Margin="5" Content="Редактировать" Width="100" Height="25"/>
+        </ToolBar>
+    </Grid>
+</Page>

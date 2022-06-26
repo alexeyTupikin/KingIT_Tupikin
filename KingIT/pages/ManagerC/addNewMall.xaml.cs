@@ -51,7 +51,6 @@ namespace KingIT.pages
             qty_floors_text.Text = Convert.ToString(current_item.floorsCount);
             kf_dop_cost_text.Text = Convert.ToString(current_item.valAddFactor);
             if(current_item.icon != null)
-
             {
                 image_view.Source = get_set_img.BytesToImage(current_item.icon);
                 fullPath = Convert.ToString(get_set_img.BytesToImage(current_item.icon));
@@ -67,7 +66,7 @@ namespace KingIT.pages
                 if ((title_text.Text.Trim(' ') != "") && (combo_status.SelectedValue != null) &&
                 (qty_halls_text.Text.Trim(' ') != "") && (city_text.Text.Trim(' ') != "") &&
                 (cost_text.Text.Trim(' ') != "") && (qty_floors_text.Text.Trim(' ') != "") &&
-                (kf_dop_cost_text.Text.Trim(' ') != "") && (fullPath != ""))
+                (kf_dop_cost_text.Text.Trim(' ') != ""))
                 {
                     edit_mall.title = title_text.Text;
                     switch (combo_status.SelectedIndex)
@@ -94,6 +93,14 @@ namespace KingIT.pages
                     edit_mall.floorsCount = Convert.ToInt32(qty_floors_text.Text);
                     edit_mall.valAddFactor = Convert.ToDecimal(kf_dop_cost_text.Text);
                     edit_mall.icon = get_set_img.GetImageBytes(fullPath);
+                    if(fullPath == "" || fullPath == null)
+                    {
+                        edit_mall.icon = cur_mall.icon;
+                    }
+                    else
+                    {
+                        edit_mall.icon = get_set_img.GetImageBytes(fullPath);
+                    }
                     cnt.SaveChanges();
                 }
                 else MessageBox.Show("Одно или несколько введенных вами значений не корректны. Сохранение отменено.");
@@ -151,7 +158,7 @@ namespace KingIT.pages
             if ((title_text.Text.Trim(' ') != "") && (combo_status.SelectedValue != null) &&
                 (qty_halls_text.Text.Trim(' ') != "") && (city_text.Text.Trim(' ') != "") &&
                 (cost_text.Text.Trim(' ') != "") && (qty_floors_text.Text.Trim(' ') != "") &&
-                (kf_dop_cost_text.Text.Trim(' ') != "") && (fullPath != ""))
+                (kf_dop_cost_text.Text.Trim(' ') != ""))
             {
                 try
                 {

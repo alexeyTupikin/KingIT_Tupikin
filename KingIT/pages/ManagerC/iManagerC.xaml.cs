@@ -211,7 +211,7 @@ namespace KingIT.pages
                 using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
                 {
                     malls malls_obj = (from m in cnt.malls where m.idMall == buf select m).FirstOrDefault();
-                    mainWindow.frame.Navigate(new pages.HallsList(mainWindow, malls_obj));
+                    mainWindow.frame.Navigate(new pages.ManagerC.HallsList(mainWindow, malls_obj));
                 }
             }
         }

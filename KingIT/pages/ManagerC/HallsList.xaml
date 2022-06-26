@@ -1,9 +1,9 @@
-﻿<Page x:Class="KingIT.pages.HallsList"
+﻿<Page x:Class="KingIT.pages.ManagerC.HallsList"
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-xmlns:local="clr-namespace:KingIT.pages"
+xmlns:local="clr-namespace:KingIT.pages.ManagerC"
 mc:Ignorable="d"
 d:DesignHeight="450" d:DesignWidth="800"
 Title="HallsList">
@@ -117,6 +117,12 @@ Title="HallsList">
               Margin="360,0,0,0"
               Content="Добавить"
               Click="Add"/>
+            <Button
+                Content="Арендовать"
+                HorizontalAlignment="Left"
+                Margin="250,0,0,0"
+                Click="rent_add"
+                />
         </StackPanel>
     </Grid>
 </Page>

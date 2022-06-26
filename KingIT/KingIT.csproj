@@ -77,6 +77,18 @@
     <Compile Include="Model\forMalls.cs">
       <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\for_employers.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\for_managerA.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\for_managerA_proc_Result.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\for_proc_managera.cs">
+      <DependentUpon>KingITDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\getHallsView.cs">
       <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
@@ -119,32 +131,46 @@
     <Compile Include="Model\tenants.cs">
       <DependentUpon>KingITDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="pages\addNewMall.xaml.cs">
+    <Compile Include="pages\Admin\addEmployer.xaml.cs">
+      <DependentUpon>addEmployer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\ManagerC\addNewMall.xaml.cs">
       <DependentUpon>addNewMall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\ManagerC\addRent.xaml.cs">
+      <DependentUpon>addRent.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\Capcha.xaml.cs">
       <DependentUpon>Capcha.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\EditHallList.xaml.cs">
+    <Compile Include="pages\ManagerC\EditHallList.xaml.cs">
       <DependentUpon>EditHallList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\HallsList.xaml.cs">
+    <Compile Include="pages\ManagerC\HallsList.xaml.cs">
       <DependentUpon>HallsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\iAdmin.xaml.cs">
+    <Compile Include="pages\Admin\iAdmin.xaml.cs">
       <DependentUpon>iAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\iManagerA.xaml.cs">
+    <Compile Include="pages\ManagerA\iManagerA.xaml.cs">
       <DependentUpon>iManagerA.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pages\iManagerC.xaml.cs">
+    <Compile Include="pages\ManagerC\iManagerC.xaml.cs">
       <DependentUpon>iManagerC.xaml</DependentUpon>
     </Compile>
     <Compile Include="pages\login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
     <Compile Include="get_set_img.cs" />
-    <Page Include="pages\addNewMall.xaml">
+    <Page Include="pages\Admin\addEmployer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\ManagerC\addNewMall.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\ManagerC\addRent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,23 +190,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\EditHallList.xaml">
+    <Page Include="pages\ManagerC\EditHallList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\HallsList.xaml">
+    <Page Include="pages\ManagerC\HallsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\iAdmin.xaml">
+    <Page Include="pages\Admin\iAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\iManagerA.xaml">
+    <Page Include="pages\ManagerA\iManagerA.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pages\iManagerC.xaml">
+    <Page Include="pages\ManagerC\iManagerC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

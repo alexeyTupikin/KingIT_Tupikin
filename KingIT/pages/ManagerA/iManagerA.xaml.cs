@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using KingIT.Model;
 
-namespace KingIT.pages
+namespace KingIT.pages.ManagerA
 {
     /// <summary>
     /// Логика взаимодействия для iManagerA.xaml
@@ -25,6 +26,16 @@ namespace KingIT.pages
         {
             InitializeComponent();
             mainWindow = _mainWindow;
+            dataGridUpdate();
+        }
+
+        public void dataGridUpdate()
+        {
+            using (KingITDBEntities1 cnt = new KingITDBEntities1())
+            {
+                var data = (from p in cnt.for_managerA_proc() select p).ToList();
+                dataGrid.ItemsSource = data;
+            }
         }
     }
 }

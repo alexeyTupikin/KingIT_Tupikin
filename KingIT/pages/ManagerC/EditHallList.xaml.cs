@@ -108,7 +108,7 @@ namespace KingIT.pages
         }
         private void Exit(object sender, RoutedEventArgs args)
         {
-            main.frame.Navigate(new HallsList(main, currentMall));
+            main.frame.Navigate(new pages.ManagerC.HallsList(main, currentMall));
         }
         private void Save(object sender, RoutedEventArgs args)
         {
@@ -134,7 +134,7 @@ namespace KingIT.pages
                             {
                                 db.halls.Add(currentHall);
                                 db.SaveChanges();
-                                main.frame.Navigate(new HallsList(main, currentMall));
+                                main.frame.Navigate(new pages.ManagerC.HallsList(main, currentMall));
                             }
                             else
                             {
@@ -160,7 +160,7 @@ namespace KingIT.pages
                                 selected.valAddFactor = currentHall.valAddFactor;
                                 selected.cost = currentHall.cost;
                                 db.SaveChanges();
-                                main.frame.Navigate(new HallsList(main, currentMall));
+                                main.frame.Navigate(new pages.ManagerC.HallsList(main, currentMall));
                             }
                         }
                     }

@@ -25,10 +25,11 @@ namespace KingIT
     public partial class MainWindow : Window
     {
         public string connectionName = "name=KingITDBEntities1";
+        public int employer_id;
         public MainWindow()
         {
             InitializeComponent();
-            frame.Navigate(new pages.iManagerC(this));
+            frame.Navigate(new pages.ManagerA.iManagerA(this));
             //setPhotoEmp();
             //setPhotoMall();
         }

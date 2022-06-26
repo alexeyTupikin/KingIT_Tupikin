@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="employers">
           <Key>
             <PropertyRef Name="idEmployer" />
@@ -91,6 +91,50 @@
             <PropertyRef Name="address" />
           </Key>
           <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KingITDB.dbo.for_employers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="for_employers">
+          <Key>
+            <PropertyRef Name="surname" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="idEmployer" />
+          </Key>
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="middlename" Type="nvarchar" MaxLength="50" />
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="photo" Type="varbinary(max)" />
+          <Property Name="idEmployer" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KingITDB.dbo.for_managerA" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="for_managerA">
+          <Key>
+            <PropertyRef Name="idMall" />
+          </Key>
+          <Property Name="Result" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="idMall" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KingITDB.dbo.for_proc_managera" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="for_proc_managera">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResultAll" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "KingITDB.dbo.forMalls" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -245,7 +289,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="add_rent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idHall" Type="int" Mode="In" />
+          <Parameter Name="status_action" Type="bit" Mode="In" />
+          <Parameter Name="hallNum" Type="nvarchar" Mode="In" />
+          <Parameter Name="idMall" Type="int" Mode="In" />
+          <Parameter Name="dateStart" Type="date" Mode="In" />
+          <Parameter Name="datend" Type="date" Mode="In" />
+          <Parameter Name="idTenant" Type="int" Mode="In" />
+          <Parameter Name="employer_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="change_rent_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="for_managerA_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getHalls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="current" Type="int" Mode="In" />
           <ReturnType>
@@ -295,6 +350,15 @@
           <Parameter Name="idEmployer" Type="int" Mode="In" />
           <Parameter Name="hallNum" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="rentHall" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status_action" Type="bit" Mode="In" />
+          <Parameter Name="hall_number" Type="nvarchar" Mode="In" />
+          <Parameter Name="mall_id" Type="int" Mode="In" />
+          <Parameter Name="start_date" Type="date" Mode="In" />
+          <Parameter Name="end_date" Type="date" Mode="In" />
+          <Parameter Name="tenant_id" Type="int" Mode="In" />
+          <Parameter Name="employer_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="RentOrBookPavilionInMall" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="status_action" Type="bit" Mode="In" />
           <Parameter Name="pavilion_number" Type="nvarchar" Mode="In" />
@@ -316,6 +380,33 @@
             <DefiningQuery>SELECT 
     [City_p].[address] AS [address]
     FROM [dbo].[City_p] AS [City_p]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="for_employers" EntityType="Self.for_employers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [for_employers].[surname] AS [surname], 
+    [for_employers].[name] AS [name], 
+    [for_employers].[middlename] AS [middlename], 
+    [for_employers].[login] AS [login], 
+    [for_employers].[password] AS [password], 
+    [for_employers].[sex] AS [sex], 
+    [for_employers].[title] AS [title], 
+    [for_employers].[phone] AS [phone], 
+    [for_employers].[photo] AS [photo], 
+    [for_employers].[idEmployer] AS [idEmployer]
+    FROM [dbo].[for_employers] AS [for_employers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="for_managerA" EntityType="Self.for_managerA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [for_managerA].[Result] AS [Result], 
+    [for_managerA].[idMall] AS [idMall]
+    FROM [dbo].[for_managerA] AS [for_managerA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="for_proc_managera" EntityType="Self.for_proc_managera" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [for_proc_managera].[title] AS [title], 
+    [for_proc_managera].[address] AS [address], 
+    [for_proc_managera].[ResultAll] AS [ResultAll]
+    FROM [dbo].[for_proc_managera] AS [for_proc_managera]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="forMalls" EntityType="Self.forMalls" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -378,8 +469,7 @@
             <End Role="malls" EntitySet="malls" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -699,7 +789,7 @@
             <End Role="rent" EntitySet="rent" />
           </AssociationSet>
           <FunctionImport Name="getHalls" IsComposable="true" ReturnType="Collection(KingITDBModel.getHalls_Result)">
-            <Parameter Name="current" Mode="In" Type="Int32" />
+          <Parameter Name="current" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getMalls" IsComposable="true" ReturnType="Collection(KingITDBModel.getMalls_Result)" />
           <FunctionImport Name="change_rent_date" />
@@ -726,7 +816,85 @@
             <Parameter Name="idTenant" Mode="In" Type="Int32" />
             <Parameter Name="employee_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="add_rent">
+            <Parameter Name="idHall" Mode="In" Type="Int32" />
+            <Parameter Name="status_action" Mode="In" Type="Boolean" />
+            <Parameter Name="hallNum" Mode="In" Type="String" />
+            <Parameter Name="idMall" Mode="In" Type="Int32" />
+            <Parameter Name="dateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="datend" Mode="In" Type="DateTime" />
+            <Parameter Name="idTenant" Mode="In" Type="Int32" />
+            <Parameter Name="employer_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="rentHall">
+            <Parameter Name="status_action" Mode="In" Type="Boolean" />
+            <Parameter Name="hall_number" Mode="In" Type="String" />
+            <Parameter Name="mall_id" Mode="In" Type="Int32" />
+            <Parameter Name="start_date" Mode="In" Type="DateTime" />
+            <Parameter Name="end_date" Mode="In" Type="DateTime" />
+            <Parameter Name="tenant_id" Mode="In" Type="Int32" />
+            <Parameter Name="employer_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="for_employers" EntityType="KingITDBModel.for_employers" />
+          <EntitySet Name="for_managerA" EntityType="KingITDBModel.for_managerA" />
+          <EntitySet Name="for_proc_managera" EntityType="KingITDBModel.for_proc_managera" />
+          <FunctionImport Name="for_managerA_proc" ReturnType="Collection(KingITDBModel.for_managerA_proc_Result)" />
         </EntityContainer>
+        <EntityType Name="for_employers">
+          <Key>
+            <PropertyRef Name="surname" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="idEmployer" />
+          </Key>
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idEmployer" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="for_managerA">
+          <Key>
+            <PropertyRef Name="area" />
+            <PropertyRef Name="cost" />
+            <PropertyRef Name="valAddFactor" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="dateStart" />
+            <PropertyRef Name="dateEnd" />
+            <PropertyRef Name="idMall" />
+          </Key>
+          <Property Name="area" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
+          <Property Name="cost" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
+          <Property Name="valAddFactor" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
+          <Property Name="Expr1" Type="Decimal" Nullable="false" Precision="4" Scale="1" />
+          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Result" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="idMall" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="for_proc_managera">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResultAll" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <ComplexType Name="for_managerA_proc_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="ResultAll" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -892,6 +1060,50 @@
           <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
           <FunctionImportMapping FunctionImportName="rent_pavilion" FunctionName="Хранилище KingITDBModel.rent_pavilion" />
           <FunctionImportMapping FunctionImportName="RentOrBookPavilionInMall" FunctionName="Хранилище KingITDBModel.RentOrBookPavilionInMall" />
+          <FunctionImportMapping FunctionImportName="add_rent" FunctionName="Хранилище KingITDBModel.add_rent" />
+          <FunctionImportMapping FunctionImportName="rentHall" FunctionName="Хранилище KingITDBModel.rentHall" />
+          <EntitySetMapping Name="for_employers">
+            <EntityTypeMapping TypeName="KingITDBModel.for_employers">
+              <MappingFragment StoreEntitySet="for_employers">
+                <ScalarProperty Name="idEmployer" ColumnName="idEmployer" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="for_managerA">
+            <EntityTypeMapping TypeName="KingITDBModel.for_managerA">
+              <MappingFragment StoreEntitySet="for_managerA">
+                <ScalarProperty Name="idMall" ColumnName="idMall" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="for_proc_managera">
+            <EntityTypeMapping TypeName="KingITDBModel.for_proc_managera">
+              <MappingFragment StoreEntitySet="for_proc_managera">
+                <ScalarProperty Name="ResultAll" ColumnName="ResultAll" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="for_managerA_proc" FunctionName="Хранилище KingITDBModel.for_managerA_proc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KingITDBModel.for_managerA_proc_Result">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="ResultAll" ColumnName="ResultAll" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KingIT.Model;
 
-namespace KingIT.pages
+namespace KingIT.pages.ManagerC
 {
     /// <summary>
     /// Логика взаимодействия для HallsList.xaml
@@ -171,5 +171,26 @@ namespace KingIT.pages
                 }
             }
         }
+
+        private void rent_add(object sender, RoutedEventArgs e)
+        {
+            if (DG.SelectedIndex != -1)
+            {
+                var selected = (getHalls_Result)DG.SelectedItem;
+                try
+                {
+                    using (var db = new KingITDBEntities1(main.connectionName))
+                    {
+                        var rented = (from h in db.halls
+                                      where h.idHall == selected.idHall
+                                      select h).FirstOrDefault();
+                        var rent = new addRent(main, rented, currentMall);
+                        rent.ShowDialog();
+                        FillDataGrid();
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
     }
-}
+}   

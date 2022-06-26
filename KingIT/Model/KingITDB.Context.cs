@@ -41,6 +41,9 @@ namespace KingIT.Model
         public virtual DbSet<City_p> City_p { get; set; }
         public virtual DbSet<forMalls> forMalls { get; set; }
         public virtual DbSet<getHallsView> getHallsView { get; set; }
+        public virtual DbSet<for_employers> for_employers { get; set; }
+        public virtual DbSet<for_managerA> for_managerA { get; set; }
+        public virtual DbSet<for_proc_managera> for_proc_managera { get; set; }
     
         [DbFunction("KingITDBEntities1", "getHalls")]
         public virtual IQueryable<getHalls_Result> getHalls(Nullable<int> current)
@@ -144,6 +147,81 @@ namespace KingIT.Model
                 new ObjectParameter("employee_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RentOrBookPavilionInMall", status_actionParameter, pavilion_numberParameter, idMallParameter, dateStartParameter, dateEndParameter, idTenantParameter, employee_idParameter);
+        }
+    
+        public virtual int add_rent(Nullable<int> idHall, Nullable<bool> status_action, string hallNum, Nullable<int> idMall, Nullable<System.DateTime> dateStart, Nullable<System.DateTime> datend, Nullable<int> idTenant, Nullable<int> employer_id)
+        {
+            var idHallParameter = idHall.HasValue ?
+                new ObjectParameter("idHall", idHall) :
+                new ObjectParameter("idHall", typeof(int));
+    
+            var status_actionParameter = status_action.HasValue ?
+                new ObjectParameter("status_action", status_action) :
+                new ObjectParameter("status_action", typeof(bool));
+    
+            var hallNumParameter = hallNum != null ?
+                new ObjectParameter("hallNum", hallNum) :
+                new ObjectParameter("hallNum", typeof(string));
+    
+            var idMallParameter = idMall.HasValue ?
+                new ObjectParameter("idMall", idMall) :
+                new ObjectParameter("idMall", typeof(int));
+    
+            var dateStartParameter = dateStart.HasValue ?
+                new ObjectParameter("dateStart", dateStart) :
+                new ObjectParameter("dateStart", typeof(System.DateTime));
+    
+            var datendParameter = datend.HasValue ?
+                new ObjectParameter("datend", datend) :
+                new ObjectParameter("datend", typeof(System.DateTime));
+    
+            var idTenantParameter = idTenant.HasValue ?
+                new ObjectParameter("idTenant", idTenant) :
+                new ObjectParameter("idTenant", typeof(int));
+    
+            var employer_idParameter = employer_id.HasValue ?
+                new ObjectParameter("employer_id", employer_id) :
+                new ObjectParameter("employer_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("add_rent", idHallParameter, status_actionParameter, hallNumParameter, idMallParameter, dateStartParameter, datendParameter, idTenantParameter, employer_idParameter);
+        }
+    
+        public virtual int rentHall(Nullable<bool> status_action, string hall_number, Nullable<int> mall_id, Nullable<System.DateTime> start_date, Nullable<System.DateTime> end_date, Nullable<int> tenant_id, Nullable<int> employer_id)
+        {
+            var status_actionParameter = status_action.HasValue ?
+                new ObjectParameter("status_action", status_action) :
+                new ObjectParameter("status_action", typeof(bool));
+    
+            var hall_numberParameter = hall_number != null ?
+                new ObjectParameter("hall_number", hall_number) :
+                new ObjectParameter("hall_number", typeof(string));
+    
+            var mall_idParameter = mall_id.HasValue ?
+                new ObjectParameter("mall_id", mall_id) :
+                new ObjectParameter("mall_id", typeof(int));
+    
+            var start_dateParameter = start_date.HasValue ?
+                new ObjectParameter("start_date", start_date) :
+                new ObjectParameter("start_date", typeof(System.DateTime));
+    
+            var end_dateParameter = end_date.HasValue ?
+                new ObjectParameter("end_date", end_date) :
+                new ObjectParameter("end_date", typeof(System.DateTime));
+    
+            var tenant_idParameter = tenant_id.HasValue ?
+                new ObjectParameter("tenant_id", tenant_id) :
+                new ObjectParameter("tenant_id", typeof(int));
+    
+            var employer_idParameter = employer_id.HasValue ?
+                new ObjectParameter("employer_id", employer_id) :
+                new ObjectParameter("employer_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("rentHall", status_actionParameter, hall_numberParameter, mall_idParameter, start_dateParameter, end_dateParameter, tenant_idParameter, employer_idParameter);
+        }
+    
+        public virtual ObjectResult<for_managerA_proc_Result> for_managerA_proc()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<for_managerA_proc_Result>("for_managerA_proc");
         }
     }
 }
