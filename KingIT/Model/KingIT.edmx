@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище KingITDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="employers">
           <Key>
             <PropertyRef Name="idEmployer" />
@@ -74,6 +74,16 @@
           </Key>
           <Property Name="idStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tenants">
           <Key>
@@ -300,6 +310,7 @@
           <Parameter Name="employer_id" Type="int" Mode="In" />
         </Function>
         <Function Name="change_rent_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="for_managerA_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getHalls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="current" Type="int" Mode="In" />
@@ -368,6 +379,36 @@
           <Parameter Name="idTenant" Type="int" Mode="In" />
           <Parameter Name="employee_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище KingITDBModelContainer">
           <EntitySet Name="employers" EntityType="Self.employers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="halls" EntityType="Self.halls" Schema="dbo" store:Type="Tables" />
@@ -375,6 +416,7 @@
           <EntitySet Name="postes" EntityType="Self.postes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rent" EntityType="Self.rent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="statuses" EntityType="Self.statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tenants" EntityType="Self.tenants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City_p" EntityType="Self.City_p" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -469,7 +511,8 @@
             <End Role="malls" EntitySet="malls" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KingITDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -580,6 +623,16 @@
           <NavigationProperty Name="malls" Relationship="Self.FK_shopping_center_statuses" FromRole="statuses" ToRole="malls" />
           <NavigationProperty Name="rent" Relationship="Self.FK_rent_statuses" FromRole="statuses" ToRole="rent" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="tenants">
           <Key>
             <PropertyRef Name="idTenant" />
@@ -595,6 +648,44 @@
             <PropertyRef Name="address" />
           </Key>
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="for_employers">
+          <Key>
+            <PropertyRef Name="surname" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="idEmployer" />
+          </Key>
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="idEmployer" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="for_managerA">
+          <Key>
+            <PropertyRef Name="idMall" />
+          </Key>
+          <Property Name="Result" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="idMall" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="for_proc_managera">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ResultAll" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
         <EntityType Name="forMalls">
           <Key>
@@ -752,8 +843,12 @@
           <EntitySet Name="postes" EntityType="Self.postes" />
           <EntitySet Name="rent" EntityType="Self.rent" />
           <EntitySet Name="statuses" EntityType="Self.statuses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tenants" EntityType="Self.tenants" />
           <EntitySet Name="City_p" EntityType="Self.City_p" />
+          <EntitySet Name="for_employers" EntityType="Self.for_employers" />
+          <EntitySet Name="for_managerA" EntityType="Self.for_managerA" />
+          <EntitySet Name="for_proc_managera" EntityType="Self.for_proc_managera" />
           <EntitySet Name="forMalls" EntityType="Self.forMalls" />
           <EntitySet Name="getHallsView" EntityType="Self.getHallsView" />
           <AssociationSet Name="fk_id_role" Association="Self.fk_id_role">
@@ -789,10 +884,21 @@
             <End Role="rent" EntitySet="rent" />
           </AssociationSet>
           <FunctionImport Name="getHalls" IsComposable="true" ReturnType="Collection(KingITDBModel.getHalls_Result)">
-          <Parameter Name="current" Mode="In" Type="Int32" />
+            <Parameter Name="current" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getMalls" IsComposable="true" ReturnType="Collection(KingITDBModel.getMalls_Result)" />
+          <FunctionImport Name="add_rent">
+            <Parameter Name="idHall" Mode="In" Type="Int32" />
+            <Parameter Name="status_action" Mode="In" Type="Boolean" />
+            <Parameter Name="hallNum" Mode="In" Type="String" />
+            <Parameter Name="idMall" Mode="In" Type="Int32" />
+            <Parameter Name="dateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="datend" Mode="In" Type="DateTime" />
+            <Parameter Name="idTenant" Mode="In" Type="Int32" />
+            <Parameter Name="employer_id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="change_rent_date" />
+          <FunctionImport Name="for_managerA_proc" ReturnType="Collection(KingITDBModel.for_managerA_proc_Result)" />
           <FunctionImport Name="login_proc" ReturnType="Collection(Int32)">
             <Parameter Name="login" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
@@ -807,25 +913,6 @@
             <Parameter Name="idEmployer" Mode="In" Type="Int32" />
             <Parameter Name="hallNum" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="RentOrBookPavilionInMall">
-            <Parameter Name="status_action" Mode="In" Type="Boolean" />
-            <Parameter Name="pavilion_number" Mode="In" Type="String" />
-            <Parameter Name="idMall" Mode="In" Type="Int32" />
-            <Parameter Name="dateStart" Mode="In" Type="DateTime" />
-            <Parameter Name="dateEnd" Mode="In" Type="DateTime" />
-            <Parameter Name="idTenant" Mode="In" Type="Int32" />
-            <Parameter Name="employee_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="add_rent">
-            <Parameter Name="idHall" Mode="In" Type="Int32" />
-            <Parameter Name="status_action" Mode="In" Type="Boolean" />
-            <Parameter Name="hallNum" Mode="In" Type="String" />
-            <Parameter Name="idMall" Mode="In" Type="Int32" />
-            <Parameter Name="dateStart" Mode="In" Type="DateTime" />
-            <Parameter Name="datend" Mode="In" Type="DateTime" />
-            <Parameter Name="idTenant" Mode="In" Type="Int32" />
-            <Parameter Name="employer_id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="rentHall">
             <Parameter Name="status_action" Mode="In" Type="Boolean" />
             <Parameter Name="hall_number" Mode="In" Type="String" />
@@ -835,65 +922,61 @@
             <Parameter Name="tenant_id" Mode="In" Type="Int32" />
             <Parameter Name="employer_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="for_employers" EntityType="KingITDBModel.for_employers" />
-          <EntitySet Name="for_managerA" EntityType="KingITDBModel.for_managerA" />
-          <EntitySet Name="for_proc_managera" EntityType="KingITDBModel.for_proc_managera" />
-          <FunctionImport Name="for_managerA_proc" ReturnType="Collection(KingITDBModel.for_managerA_proc_Result)" />
+          <FunctionImport Name="RentOrBookPavilionInMall">
+            <Parameter Name="status_action" Mode="In" Type="Boolean" />
+            <Parameter Name="pavilion_number" Mode="In" Type="String" />
+            <Parameter Name="idMall" Mode="In" Type="Int32" />
+            <Parameter Name="dateStart" Mode="In" Type="DateTime" />
+            <Parameter Name="dateEnd" Mode="In" Type="DateTime" />
+            <Parameter Name="idTenant" Mode="In" Type="Int32" />
+            <Parameter Name="employee_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(KingITDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(KingITDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <EntityType Name="for_employers">
-          <Key>
-            <PropertyRef Name="surname" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="login" />
-            <PropertyRef Name="password" />
-            <PropertyRef Name="sex" />
-            <PropertyRef Name="title" />
-            <PropertyRef Name="phone" />
-            <PropertyRef Name="idEmployer" />
-          </Key>
-          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="idEmployer" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="for_managerA">
-          <Key>
-            <PropertyRef Name="area" />
-            <PropertyRef Name="cost" />
-            <PropertyRef Name="valAddFactor" />
-            <PropertyRef Name="Expr1" />
-            <PropertyRef Name="dateStart" />
-            <PropertyRef Name="dateEnd" />
-            <PropertyRef Name="idMall" />
-          </Key>
-          <Property Name="area" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
-          <Property Name="cost" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
-          <Property Name="valAddFactor" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
-          <Property Name="Expr1" Type="Decimal" Nullable="false" Precision="4" Scale="1" />
-          <Property Name="dateStart" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dateEnd" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Result" Type="Decimal" Precision="38" Scale="4" />
-          <Property Name="idMall" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="for_proc_managera">
-          <Key>
-            <PropertyRef Name="title" />
-            <PropertyRef Name="address" />
-          </Key>
-          <Property Name="title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResultAll" Type="Decimal" Precision="38" Scale="6" />
-        </EntityType>
         <ComplexType Name="for_managerA_proc_Result">
           <Property Type="String" Name="title" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="ResultAll" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -977,6 +1060,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KingITDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tenants">
             <EntityTypeMapping TypeName="KingITDBModel.tenants">
               <MappingFragment StoreEntitySet="tenants">
@@ -991,6 +1085,39 @@
             <EntityTypeMapping TypeName="KingITDBModel.City_p">
               <MappingFragment StoreEntitySet="City_p">
                 <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="for_employers">
+            <EntityTypeMapping TypeName="KingITDBModel.for_employers">
+              <MappingFragment StoreEntitySet="for_employers">
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="idEmployer" ColumnName="idEmployer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="for_managerA">
+            <EntityTypeMapping TypeName="KingITDBModel.for_managerA">
+              <MappingFragment StoreEntitySet="for_managerA">
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="idMall" ColumnName="idMall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="for_proc_managera">
+            <EntityTypeMapping TypeName="KingITDBModel.for_proc_managera">
+              <MappingFragment StoreEntitySet="for_proc_managera">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="ResultAll" ColumnName="ResultAll" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1056,45 +1183,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="change_rent_date" FunctionName="Хранилище KingITDBModel.change_rent_date" />
-          <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
-          <FunctionImportMapping FunctionImportName="rent_pavilion" FunctionName="Хранилище KingITDBModel.rent_pavilion" />
-          <FunctionImportMapping FunctionImportName="RentOrBookPavilionInMall" FunctionName="Хранилище KingITDBModel.RentOrBookPavilionInMall" />
           <FunctionImportMapping FunctionImportName="add_rent" FunctionName="Хранилище KingITDBModel.add_rent" />
-          <FunctionImportMapping FunctionImportName="rentHall" FunctionName="Хранилище KingITDBModel.rentHall" />
-          <EntitySetMapping Name="for_employers">
-            <EntityTypeMapping TypeName="KingITDBModel.for_employers">
-              <MappingFragment StoreEntitySet="for_employers">
-                <ScalarProperty Name="idEmployer" ColumnName="idEmployer" />
-                <ScalarProperty Name="photo" ColumnName="photo" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="middlename" ColumnName="middlename" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="for_managerA">
-            <EntityTypeMapping TypeName="KingITDBModel.for_managerA">
-              <MappingFragment StoreEntitySet="for_managerA">
-                <ScalarProperty Name="idMall" ColumnName="idMall" />
-                <ScalarProperty Name="Result" ColumnName="Result" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="for_proc_managera">
-            <EntityTypeMapping TypeName="KingITDBModel.for_proc_managera">
-              <MappingFragment StoreEntitySet="for_proc_managera">
-                <ScalarProperty Name="ResultAll" ColumnName="ResultAll" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="title" ColumnName="title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="change_rent_date" FunctionName="Хранилище KingITDBModel.change_rent_date" />
           <FunctionImportMapping FunctionImportName="for_managerA_proc" FunctionName="Хранилище KingITDBModel.for_managerA_proc">
             <ResultMapping>
               <ComplexTypeMapping TypeName="KingITDBModel.for_managerA_proc_Result">
@@ -1104,6 +1194,34 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="login_proc" FunctionName="Хранилище KingITDBModel.login_proc" />
+          <FunctionImportMapping FunctionImportName="rent_pavilion" FunctionName="Хранилище KingITDBModel.rent_pavilion" />
+          <FunctionImportMapping FunctionImportName="rentHall" FunctionName="Хранилище KingITDBModel.rentHall" />
+          <FunctionImportMapping FunctionImportName="RentOrBookPavilionInMall" FunctionName="Хранилище KingITDBModel.RentOrBookPavilionInMall" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище KingITDBModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище KingITDBModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище KingITDBModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище KingITDBModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KingITDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище KingITDBModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KingITDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище KingITDBModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище KingITDBModel.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -10,11 +10,13 @@
 namespace KingIT.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class for_managerA
+    public partial class sp_helpdiagrams_Result
     {
-        public Nullable<decimal> Result { get; set; }
-        public int idMall { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

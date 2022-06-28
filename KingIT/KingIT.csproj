@@ -69,67 +69,76 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\City_p.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\employers.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\forMalls.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\for_employers.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\for_managerA.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\for_managerA_proc_Result.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\for_proc_managera.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\getHallsView.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\getHalls_Result.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\getMalls_Result.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\halls.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\KingITDB.Context.cs">
+    <Compile Include="Model\KingIT.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDB.Context.tt</DependentUpon>
+      <DependentUpon>KingIT.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\KingITDB.cs">
+    <Compile Include="Model\KingIT.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\KingITDB.Designer.cs">
+    <Compile Include="Model\KingIT.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KingITDB.edmx</DependentUpon>
+      <DependentUpon>KingIT.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\malls.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\postes.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\rent.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>KingIT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sp_helpdiagrams_Result.cs">
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\statuses.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\tenants.cs">
-      <DependentUpon>KingITDB.tt</DependentUpon>
+      <DependentUpon>KingIT.tt</DependentUpon>
     </Compile>
     <Compile Include="pages\Admin\addEmployer.xaml.cs">
       <DependentUpon>addEmployer.xaml</DependentUpon>
@@ -233,12 +242,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\KingITDB.edmx">
+    <EntityDeploy Include="Model\KingIT.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KingITDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>KingIT.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\KingITDB.edmx.diagram">
-      <DependentUpon>KingITDB.edmx</DependentUpon>
+    <None Include="Model\KingIT.edmx.diagram">
+      <DependentUpon>KingIT.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -323,15 +332,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\KingITDB.Context.tt">
+    <Content Include="Model\KingIT.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KingITDB.edmx</DependentUpon>
-      <LastGenOutput>KingITDB.Context.cs</LastGenOutput>
+      <DependentUpon>KingIT.edmx</DependentUpon>
+      <LastGenOutput>KingIT.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\KingITDB.tt">
+    <Content Include="Model\KingIT.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KingITDB.edmx</DependentUpon>
-      <LastGenOutput>KingITDB.cs</LastGenOutput>
+      <DependentUpon>KingIT.edmx</DependentUpon>
+      <LastGenOutput>KingIT.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

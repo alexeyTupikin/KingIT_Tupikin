@@ -109,6 +109,8 @@ namespace KingIT.pages.Admin
                         cnt.employers.Add(new_emp);
                     }
                     cnt.SaveChanges();
+                    MessageBox.Show("Изменения сохранены в базу данных.");
+                    this.Close();
                 }
             }
             else MessageBox.Show("Одно или несколько из введенных вами полей некорректно или имеет пустое значение.");

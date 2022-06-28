@@ -38,8 +38,8 @@ namespace KingIT.pages
         {
             using (KingITDBEntities1 cnt = new KingITDBEntities1(mainWindow.connectionName))
             {
-                var data = (from m in cnt.forMalls orderby m.address, m.StatusMall select m);
-                dataGridMalls.ItemsSource = data.ToList();
+                var data = (from m in cnt.forMalls orderby m.address, m.StatusMall select m).ToList();
+                dataGridMalls.ItemsSource = data;
                 f_Status.Items.Clear();
                 f_Status.Items.Add("План");
                 f_Status.Items.Add("Реализация");
@@ -77,6 +77,7 @@ namespace KingIT.pages
         {
             form = "add";
             addNewMall addNewMallWindow = new addNewMall(form);
+            addNewMallWindow.Title = "Добавление ТЦ";
             addNewMallWindow.ShowDialog();
             if(addNewMallWindow.IsActive == false)
             {
@@ -193,6 +194,7 @@ namespace KingIT.pages
             {
                 form = "edit";
                 addNewMall editNewMallWindow = new addNewMall((forMalls)(dataGridMalls.SelectedItem), mainWindow, form);
+                editNewMallWindow.Title = "Редактирование ТЦ";
                 editNewMallWindow.ShowDialog();
                 if (editNewMallWindow.IsActive == false)
                 {

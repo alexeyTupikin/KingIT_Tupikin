@@ -26,8 +26,8 @@ namespace KingIT.pages
         public login(MainWindow _mainWindow)
         {
             InitializeComponent();
-            mainWindow.Title = "Авторизация";
             mainWindow = _mainWindow;
+            mainWindow.Title = "Авторизация";
         }
 
         private void login_ac_Click(object sender, RoutedEventArgs e)
